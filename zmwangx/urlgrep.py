@@ -3,7 +3,6 @@
 """Extract URLs from HTML documents."""
 
 import argparse
-import html.parser
 import re
 import sys
 import urllib.parse
@@ -104,12 +103,12 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
         If content, filepath and url are all None.
     OSError
         If failed to open the specified file.
-    html.parser.HTMLParseError
-        If HTML parsing fails.
     requests.exceptions.RequestException
         If requests fail to retrieve the URL specified.
 
     """
+
+    # pylint: disable=too-many-arguments,too-many-locals,too-many-branches
 
     urlscheme = re.compile(r"^\w+://")
 
@@ -139,7 +138,7 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
     # base URL might be modified by the HTML <base> tag, which must
     # reside inside <head>
     if soup.head and soup.head.base and "href" in soup.head.base.attrs:
-        base = s.head.base["href"]
+        base = soup.head.base["href"]
 
     matching_urls = []
     for tag in soup.descendants:
@@ -192,19 +191,13 @@ def main():
 
     returncode = 0
     if not urls and not filepaths:
-        try:
-            content = sys.stdin.read()
-            matching_urls = urlgrep(pattern=pattern,
-                                    content=content,
-                                    base=base,
-                                    deduplicate=deduplicate)
-            print('\n'.join(matching_urls))
-            sys.stdout.flush()
-        except html.parser.HTMLParseError as err:
-            sys.stderr.write("error: failed to parse stdin as HTML\n")
-            sys.stderr.write("error: %s\n" % str(err))
-            sys.stderr.flush()
-            returncode = 1
+        content = sys.stdin.read()
+        matching_urls = urlgrep(pattern=pattern,
+                                content=content,
+                                base=base,
+                                deduplicate=deduplicate)
+        print('\n'.join(matching_urls))
+        sys.stdout.flush()
     else:
         for url in urls:
             try:
@@ -221,11 +214,6 @@ def main():
 
             except requests.exceptions.RequestException as err:
                 sys.stderr.write("error: failed to get '%s'\n" % url)
-                sys.stderr.write("error: %s\n" % str(err))
-                sys.stderr.flush()
-                returncode = 1
-            except html.parser.HTMLParseError as err:
-                sys.stderr.write("error: failed to parse '%s'\n" % url)
                 sys.stderr.write("error: %s\n" % str(err))
                 sys.stderr.flush()
                 returncode = 1
@@ -246,11 +234,6 @@ def main():
 
             except OSError as err:
                 sys.stderr.write("error: failed to open '%s'\n" % filepath)
-                sys.stderr.write("error: %s\n" % str(err))
-                sys.stderr.flush()
-                returncode = 1
-            except html.parser.HTMLParseError as err:
-                sys.stderr.write("error: failed to parse '%s'\n" % filepath)
                 sys.stderr.write("error: %s\n" % str(err))
                 sys.stderr.flush()
                 returncode = 1

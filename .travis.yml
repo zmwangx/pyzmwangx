@@ -13,4 +13,5 @@ script:
   - urlgrep -b "$PYTHON_ORG_BASE" <python_org_index.html >from-stdin.out
   - diff from-url.out from-file.out
   - diff from-url.out from-stdin.out
+  - cat from-url.out
   - urlgrep -u python.org -p favicon
