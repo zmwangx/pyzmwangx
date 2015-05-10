@@ -13,4 +13,4 @@ script:
   - urlgrep -b "$PYTHON_ORG_BASE" <python_org_index.html >from-stdin.out
   - diff from-url.out from-file.out
   - diff from-url.out from-stdin.out
-  - [[ $(urlgrep -u python.org -p favicon | wc -l ) == 1 ]]
+  - urlgrep -u python.org -p favicon
