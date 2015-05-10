@@ -20,6 +20,7 @@ This will install the ``zmwangx`` package.
 Modules
 -------
 
+* ``humansize``: convert size in bytes to human readable string (IEC or SI). Installs a console script ``humansize``.
 * ``infrastructure``: testing infrastructure.
 * ``urlgrep``: parse and match URLs from HTML documents. Installs a console script ``urlgrep``.
 

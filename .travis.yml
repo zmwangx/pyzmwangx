@@ -3,10 +3,13 @@ python:
   - 3.3
   - 3.4
 install:
+  - pip install -r requirements.txt -r tests/requirements.txt
   - python setup.py develop
+script:
+  - nosetests --verbose --exe --with-coverage --cover-erase --cover-package=zmwangx --with-doctest
+  # random tests of urlgrep
   - PYTHON_ORG_BASE=$(curl -sSIL python.org | awk '/^Location/ {print $2}' | tail -1 | tr -d '\r' | tr -d '\n')
   - curl -sSL python.org >python_org_index.html
-script:
   - urlgrep -u python.org >from-url.out
   - urlgrep python_org_index.html -b "$PYTHON_ORG_BASE" >from-file.out
   - urlgrep -b "$PYTHON_ORG_BASE" <python_org_index.html >from-stdin.out
