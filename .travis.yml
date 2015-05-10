@@ -2,7 +2,6 @@ language: python
 python:
   - 3.3
   - 3.4
-  - nightly
 install:
   - python setup.py develop
   - PYTHON_ORG_BASE=$(curl -sSIL python.org | awk '/^Location/ {print $2}' | tail -1 | tr -d '\r' | tr -d '\n')
