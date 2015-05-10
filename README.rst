@@ -6,6 +6,8 @@ py-zmwangx
 
 This is a collection of small Python utilities used in my day-to-day scripts.
 
+API doc is hosted on Read the Docs: http://py-zmwangx.rtfd.org
+
 ------------
 Installation
 ------------

@@ -13,6 +13,8 @@ import tempfile
 class NormalizedStringIO(io.StringIO):
     """StringIO, with write operations normalized to unicode."""
 
+    # pylint: disable=invalid-name
+
     def __init__(self, buffer=None):
         super(NormalizedStringIO, self).__init__(buffer)
 
@@ -28,9 +30,11 @@ class NormalizedStringIO(io.StringIO):
                              type(s).__name__)
 
     def write(self, s):
+        """Normalized write method."""
         super().write(self.normalized(s))
 
-    def writelines(self,lines):
+    def writelines(self, lines):
+        """Noralized writelines method."""
         lines = [self.normalized(line) for line in lines]
         super().writelines(lines)
 
@@ -46,6 +50,8 @@ class Tee(io.TextIOBase):
     exception that one can call getvalue() as if it is also a StringIO.
 
     """
+
+    # pylint: disable=missing-docstring,unused-argument
 
     def __init__(self, textio):
         if not textio.writable():
@@ -121,6 +127,7 @@ class Tee(io.TextIOBase):
     def writable():
         return True
 
+    # pylint: disable=invalid-name
     def write(self, s):
         bytes_written = self._textio.write(s)
         self._stringio.write(s)

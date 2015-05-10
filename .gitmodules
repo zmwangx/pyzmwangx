@@ -1,0 +1,6 @@
+[submodule "docs/source/numpydoc"]
+	path = docs/numpydoc
+	url = https://github.com/numpy/numpydoc.git
+[submodule "docs/source/scipy-sphinx-theme"]
+	path = docs/scipy-sphinx-theme
+	url = https://github.com/scipy/scipy-sphinx-theme.git

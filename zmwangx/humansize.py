@@ -29,7 +29,11 @@ _PREFIXES = {
     'iec': ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
     'si': ['K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'],
 }
-"""SI (metric) and IEC (binary) prefixes."""
+"""SI (metric) and IEC (binary) prefixes.
+
+Starting from the first nontrivial ones (Ki or K).
+
+"""
 
 def humansize(size, prefix="iec-i", unit="B", space=False):
     """Convert size in number of bytes to human readable format.
@@ -90,6 +94,8 @@ def humansize(size, prefix="iec-i", unit="B", space=False):
     multiplier = 1000 if prefix == "si" else 1024
     if size < multiplier:
         return "%d%s%s" % (size, connection, unit)
+
+    unitprefix = ""  # suppress undefined-loop-variable
     for unitprefix in _PREFIXES[prefix]:
         size /= multiplier
         if size < multiplier:
@@ -101,11 +107,11 @@ def humansize(size, prefix="iec-i", unit="B", space=False):
                 return "%.1f%s" % (round_up(size, 1), fullunit)
             else:
                 return "%.0f%s" % (round_up(size, 0), fullunit)
-    else:
-        # use the largest unit
-        return "%.1f%s%s%s" % (round_up(size, 1), connection, unitprefix, unit)
+    # use the largest unit
+    return "%.1f%s%s%s" % (round_up(size, 1), connection, unitprefix, unit)
 
 def main():
+    """CLI interface."""
     description = "Convert size in number of bytes to human readable format."
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument("-p", "--prefix",
