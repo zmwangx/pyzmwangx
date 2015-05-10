@@ -1,0 +1,16 @@
+language: python
+python:
+  - 3.3
+  - 3.4
+  - nightly
+install:
+  - python setup.py develop
+  - PYTHON_ORG_BASE=$(curl -sSIL python.org | awk '/^Location/ {print $2}' | tail -1 | tr -d '\r' | tr -d '\n')
+  - curl -sSL python.org >python_org_index.html
+script:
+  - urlgrep -u python.org >from-url.out
+  - urlgrep python_org_index.html -b "$PYTHON_ORG_BASE" >from-file.out
+  - urlgrep -b "$PYTHON_ORG_BASE" <python_org_index.html >from-stdin.out
+  - diff from-url.out from-file.out
+  - diff from-url.out from-stdin.out
+  - [[ $(urlgrep -u python.org -p favicon | wc -l ) == 1 ]]
