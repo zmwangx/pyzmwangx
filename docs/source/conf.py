@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# py-zmwangx documentation build configuration file, created by
+# pyzmwangx documentation build configuration file, created by
 # sphinx-quickstart on Sat May  9 20:53:39 2015.
 #
 # This file is execfile()d with the current directory set to its
@@ -54,7 +54,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'py-zmwangx'
+project = 'pyzmwangx'
 copyright = '2015, Zhiming Wang'
 author = 'Zhiming Wang'
 
@@ -217,7 +217,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'py-zmwangxdoc'
+htmlhelp_basename = 'pyzmwangxdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -239,7 +239,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'py-zmwangx.tex', 'py-zmwangx Documentation',
+  (master_doc, 'pyzmwangx.tex', 'pyzmwangx Documentation',
    'Zhiming Wang', 'manual'),
 ]
 
@@ -269,7 +269,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'py-zmwangx', 'py-zmwangx Documentation',
+    (master_doc, 'pyzmwangx', 'pyzmwangx Documentation',
      [author], 1)
 ]
 
@@ -283,8 +283,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'py-zmwangx', 'py-zmwangx Documentation',
-   author, 'py-zmwangx', 'One line description of project.',
+  (master_doc, 'pyzmwangx', 'pyzmwangx Documentation',
+   author, 'pyzmwangx', 'One line description of project.',
    'Miscellaneous'),
 ]
 

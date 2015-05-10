@@ -16,7 +16,7 @@ setuptools.setup(
     version='0.1',
     description='A collection of shared utilities for day-to-day scripting',
     long_description='',
-    url='https://github.com/zmwangx/py-zmwangx',
+    url='https://github.com/zmwangx/pyzmwangx',
     author='Zhiming Wang',
     author_email='zmwangx@gmail.com',
     license='Public Domain',

@@ -1,10 +1,10 @@
-py-zmwangx
+pyzmwangx
 ==========
 
 .. raw:: html
 
-   <a href="https://travis-ci.org/zmwangx/py-zmwangx" target="_blank">
-     <img src="https://travis-ci.org/zmwangx/py-zmwangx.svg?branch=master" alt="Build Status" />
+   <a href="https://travis-ci.org/zmwangx/pyzmwangx" target="_blank">
+     <img src="https://travis-ci.org/zmwangx/pyzmwangx.svg?branch=master" alt="Build Status" />
    </a>
 
 This is a collection of small Python utilities used in my day-to-day scripts.
