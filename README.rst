@@ -8,7 +8,7 @@ This is a collection of small Python utilities used in my day-to-day scripts.
 
 .. raw:: html
 
-   API doc is <ins cite="https://readthedocs.org/builds/pyzmwangx/2730973/" datetime="2015-05-09T21:50:47-0700">not</ins> hosted on Read the Docs, since their Python 3.x environment is fake. If you want to read the API documentation, either dive into the source files, or roll your own build.
+   API doc is <ins cite="https://readthedocs.org/builds/pyzmwangx/2732792/" datetime="2015-05-09T21:50:47-0700">not</ins> hosted on Read the Docs, since their Python 3.x environment is fake. If you want to read the API documentation, either dive into the source files, or roll your own build.
 
 ------------
 Installation

@@ -359,5 +359,5 @@ def linkcode_resolve(domain, info):
 
     fn = relpath(fn, start=dirname(zmwangx.__file__))
 
-    return ("http://github.com/zmwangx/zmwangx/blob/master/zmwangx/%s%s"
+    return ("http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/%s%s"
             % (fn, linespec))
