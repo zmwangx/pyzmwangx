@@ -24,7 +24,7 @@ class NormalizedStringIO(io.StringIO):
         if isinstance(s, str):
             return s
         elif isinstance(s, bytes):
-            return s.decode('utf-8')
+            return s.decode("utf-8")
         else:
             raise ValueError("expected str or bytes, got %s" %
                              type(s).__name__)
@@ -187,17 +187,27 @@ def tee_stderr():
 def change_home():
     """Single use context manager for changing HOME to a temp directory.
 
+    The context manager also temporarily disables XDG_CONFIG_HOME,
+    XDG_DATA_HOME, and XDG_CACHE_HOME to avoid reading/writing the wrong
+    configs, data files, or cache.
+
     The temp directory will be empty.
 
     """
 
-    if 'HOME' in os.environ:
-        saved_home = os.environ['HOME']
-    else:
-        saved_home = None
+    saved_env_vars = {}
+    for key in ["HOME", "XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME"]:
+        saved_env_vars[key] = os.environ[key] if key in os.environ else None
+
     tmp_home = tempfile.mkdtemp()
-    os.environ['HOME'] = tmp_home
+    os.environ["HOME"] = tmp_home
+    for key in ["XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME"]:
+        if key in os.environ:
+            os.environ.pop(key)
+
     yield tmp_home
+
     shutil.rmtree(tmp_home)
-    if saved_home is not None:
-        os.environ['HOME'] = saved_home
+    for key in ["HOME", "XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME"]:
+        if saved_env_vars[key] is not None:
+            os.environ[key] = saved_env_vars[key]
