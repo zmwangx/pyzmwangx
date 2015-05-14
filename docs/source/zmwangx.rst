@@ -6,6 +6,7 @@ Submodules
 
 .. toctree::
 
+   zmwangx.colorout
    zmwangx.humansize
    zmwangx.infrastructure
    zmwangx.urlgrep
