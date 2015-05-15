@@ -44,8 +44,9 @@ setuptools.setup(
     },
     entry_points={
         'console_scripts': [
-            'urlgrep=zmwangx.urlgrep:main',
             'humansize=zmwangx.humansize:main',
+            'humantime=zmwangx.humantime:main',
+            'urlgrep=zmwangx.urlgrep:main',
         ]
     },
     test_suite='tests',

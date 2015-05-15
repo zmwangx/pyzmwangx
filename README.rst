@@ -24,6 +24,7 @@ Modules
 
 * ``colorout``: colorize stdout and stderr.
 * ``humansize``: convert size in bytes to human readable string (IEC or SI). Installs a console script ``humansize``.
+* ``humantime``: convert duration in seconds to human readable string. Installs a console script ``humantime``.
 * ``infrastructure``: testing infrastructure.
 * ``urlgrep``: parse and match URLs from HTML documents. Installs a console script ``urlgrep``.
 

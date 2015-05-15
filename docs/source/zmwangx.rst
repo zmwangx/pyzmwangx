@@ -8,6 +8,7 @@ Submodules
 
    zmwangx.colorout
    zmwangx.humansize
+   zmwangx.humantime
    zmwangx.infrastructure
    zmwangx.urlgrep
 

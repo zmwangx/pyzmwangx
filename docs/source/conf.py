@@ -126,8 +126,7 @@ html_theme_options = {
     "sidebar": "right",
     "scipy_org_logo": False,
     "rootlinks": [
-        ('https://github.com/zmwangx/storyboard', 'GitHub'),
-        ('https://pypi.python.org/pypi/storyboard/', 'PyPI'),
+        ('https://github.com/zmwangx/pyzmwangx', 'GitHub'),
     ]
 }
 numpydoc_show_class_members = False
