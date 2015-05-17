@@ -138,6 +138,14 @@ def cberrwrite(color, msg, file=sys.stderr):
     """Write to sys.stderr in bold color."""
     cbwrite(color, msg, sys.stderr)
 
+def cnewline(file=sys.stdout):
+    """Write a newline to file."""
+    file.write("\n")
+
+def cerrnewline():
+    """Write a newline to sys.stderr."""
+    sys.stderr.write("\n")
+
 def cprompt(prompt, info=None, allow_empty=False, color="green"):
     """Prompt for user input.
 
