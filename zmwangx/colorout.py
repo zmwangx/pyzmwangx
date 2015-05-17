@@ -55,6 +55,11 @@ def cwarning(msg):
     sys.stderr.write("%swarning: %s%s\n" %
                      (COLORS["YELLOW"], msg, COLORS["RESET"]))
 
+def ccommand(cmd):
+    """Print command to run in bold blue."""
+    sys.stderr.write("%s%s%s%s\n" %
+                     (COLORS["BOLD"], COLORS["BLUE"], cmd, COLORS["RESET"]))
+
 def cprogress(msg):
     """Print progress to stderr in green."""
     sys.stderr.write("%s%s%s\n" % (COLORS["GREEN"], msg, COLORS["RESET"]))
@@ -74,7 +79,7 @@ def _normalize_color_name(name):
     if name in _COLOR_NAME_CHOICES:
         return name
     else:
-        warnings.warn("undefined color '%s'" % name, RuntimeWarning)
+        warnings.warn("undefined color '%s'" % name)
         return "DEFAULT"
 
 def cprint(color, msg, file=sys.stdout):
@@ -132,3 +137,80 @@ def cbwrite(color, msg, file=sys.stdout):
 def cberrwrite(color, msg, file=sys.stderr):
     """Write to sys.stderr in bold color."""
     cbwrite(color, msg, sys.stderr)
+
+def cyesno(info=None, prompt="Continue? [yN] ", default="n", color="yellow"):
+    """Prompt for yes/no. Loop on invalid responses.
+
+    Example usage::
+
+        cyesno(info="We are having a bit of trouble here; "
+               "continuing execution might blow up your computer.")
+
+    And a session with the parameters above (user input are surrounded
+    with * * for clarity)::
+
+        We are having a bit of trouble here; continuing execution might
+        blow up your computer.
+        Continue? [yN] *what the heck?*
+        Please answer yes or no.
+        Continue? [yN] *i don't understand!*
+        Please answer yes or no.
+        Continue? [yN] *n*
+
+    And the return value will be ``False``, for "no".
+
+    Parameters
+    ----------
+    info : str
+        Info string printed at the very beginning. If ``None``, no info
+        string is printed. Default is ``None``.
+    prompt : str
+        Prompt/question printed to the user before asking for yes/no
+        each time. (The prompt may be printed multiple times if the user
+        provides invalid responses. Default is ``"Continue? [yN] "``.
+    default : {"n", "y", None}
+        Default response (used in case user's response is empty, i.e.,
+        user only presses enter). If ``None``, then there's no default
+        response, and an empty response is considered invalid. Default
+        is ``"n"``.
+    color : str
+        Color for info and prompt. Default is yellow.
+
+    Returns
+    -------
+    boolean
+        ``True`` if the interpreted response is "yes", ``False``
+        otherwise.
+
+    """
+    with open("/dev/tty", "w", encoding="utf-8") as devtty:
+        if default is not None:
+            if default.startswith(("y", "Y")):
+                default = "y"
+            elif default.startswith(("n", "N")):
+                default = "n"
+            else:
+                warnings.warn("invalid default '%s', falling back to 'no'" %
+                              default)
+                default = "n"
+
+        if info is not None:
+            cprint(color, info, file=devtty)
+
+        while True:
+            cwrite(color, prompt, file=devtty)
+            devtty.flush()
+            response = input()
+            yesno = None
+            if not response and default is not None:
+                yesno = default
+            elif response.startswith(("y", "Y")):
+                yesno = "y"
+            elif response.startswith(("n", "N")):
+                yesno = "n"
+            else:
+                cprint("default", "Please answer yes or no.", file=devtty)
+            if yesno is not None:
+                break
+
+        return yesno == "y"
