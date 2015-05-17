@@ -138,6 +138,28 @@ def cberrwrite(color, msg, file=sys.stderr):
     """Write to sys.stderr in bold color."""
     cbwrite(color, msg, sys.stderr)
 
+def cprompt(info=None, prompt="Please enter a value: ", allow_empty=False,
+            color="green"):
+    """Prompt for user input.
+
+    See `cyesno` for documentation of parameters. The `allow_empty`
+    parameter dictates whether empty input is allowed; if False, this
+    function loops on empty input.
+
+    """
+    with open("/dev/tty", "w", encoding="utf-8") as devtty:
+        if info is not None:
+            cprint(color, info, file=devtty)
+        while True:
+            cwrite(color, prompt, file=devtty)
+            devtty.flush()
+            response = input()
+            if response or allow_empty:
+                break
+            else:
+                cprint("default", "Input should not be empty.", file=devtty)
+        return response
+
 def cyesno(info=None, prompt="Continue? [yN] ", default="n", color="yellow"):
     """Prompt for yes/no. Loop on invalid responses.
 
