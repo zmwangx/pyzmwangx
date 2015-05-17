@@ -138,8 +138,7 @@ def cberrwrite(color, msg, file=sys.stderr):
     """Write to sys.stderr in bold color."""
     cbwrite(color, msg, sys.stderr)
 
-def cprompt(info=None, prompt="Please enter a value: ", allow_empty=False,
-            color="green"):
+def cprompt(prompt, info=None, allow_empty=False, color="green"):
     """Prompt for user input.
 
     See `cyesno` for documentation of parameters. The `allow_empty`
