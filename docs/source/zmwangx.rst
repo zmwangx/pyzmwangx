@@ -10,6 +10,7 @@ Submodules
    zmwangx.humansize
    zmwangx.humantime
    zmwangx.infrastructure
+   zmwangx.pbar
    zmwangx.urlgrep
 
 Module contents
