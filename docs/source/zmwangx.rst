@@ -7,6 +7,7 @@ Submodules
 .. toctree::
 
    zmwangx.colorout
+   zmwangx.config
    zmwangx.humansize
    zmwangx.humantime
    zmwangx.infrastructure

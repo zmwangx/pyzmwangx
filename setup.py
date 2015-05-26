@@ -33,6 +33,7 @@ setuptools.setup(
     keywords='utilities',
     packages=['zmwangx'],
     install_requires=[
+        'PyYAML',
         'beautifulsoup4',
         'requests',
     ],
