@@ -96,13 +96,12 @@ def cwrite(color, msg, file=sys.stdout):
     color = _normalize_color_name(color)
     file.write("%s%s%s" % (COLORS[color], msg, COLORS["RESET"]))
 
-def cerrwrite(color, msg, file=sys.stderr):
+def cerrwrite(color, msg):
     """Write to sys.stderr in color."""
     cwrite(color, msg, sys.stderr)
 
 def bprint(msg, file=sys.stdout):
     """Print in bold."""
-    color = _normalize_color_name(color)
     file.write("%s%s%s\n" % (COLORS["BOLD"], msg, COLORS["RESET"]))
 
 def berrprint(msg):
@@ -111,7 +110,6 @@ def berrprint(msg):
 
 def bwrite(msg, file=sys.stdout):
     """Write in bold."""
-    color = _normalize_color_name(color)
     file.write("%s%s%s" % (COLORS["BOLD"], msg, COLORS["RESET"]))
 
 def berrwrite(msg):
@@ -134,7 +132,7 @@ def cbwrite(color, msg, file=sys.stdout):
     file.write("%s%s%s%s" %
                (COLORS["BOLD"], COLORS[color], msg, COLORS["RESET"]))
 
-def cberrwrite(color, msg, file=sys.stderr):
+def cberrwrite(color, msg):
     """Write to sys.stderr in bold color."""
     cbwrite(color, msg, sys.stderr)
 
