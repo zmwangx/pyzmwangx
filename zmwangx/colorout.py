@@ -156,7 +156,7 @@ def cprompt(prompt, info=None, allow_empty=False, color="green"):
         if info is not None:
             cprint(color, info, file=devtty)
         while True:
-            cwrite(color, prompt, file=devtty)
+            cprint(color, prompt, file=devtty)
             devtty.flush()
             response = input()
             if response or allow_empty:
