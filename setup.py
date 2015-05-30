@@ -22,7 +22,7 @@ with open(os.path.join(here, 'zmwangx', 'version.py')) as f:
 
 setuptools.setup(
     name='zmwangx',
-    version='0.1',
+    version=__version__,
     description='A collection of shared utilities for day-to-day scripting',
     long_description=long_description,
     url='https://github.com/zmwangx/pyzmwangx',
