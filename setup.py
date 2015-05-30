@@ -2,6 +2,7 @@
 
 """A collection of shared utilities for day-to-day scripting."""
 
+import os
 import setuptools
 import sys
 
@@ -11,11 +12,19 @@ if PY_MAJOR_VERSION < 3 or PY_MAJOR_VERSION == 3 and PY_MINOR_VERSION < 3:
     raise Exception("python %d.%d detected; minimum version 3.3 required" %
                     (PY_MAJOR_VERSION, PY_MINOR_VERSION))
 
+here = os.path.dirname(os.path.realpath(__file__))
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
+
+# read version from version.py and save in __version__
+with open(os.path.join(here, 'zmwangx', 'version.py')) as f:
+    exec(f.read())
+
 setuptools.setup(
     name='zmwangx',
     version='0.1',
     description='A collection of shared utilities for day-to-day scripting',
-    long_description='',
+    long_description=long_description,
     url='https://github.com/zmwangx/pyzmwangx',
     author='Zhiming Wang',
     author_email='zmwangx@gmail.com',
