@@ -81,6 +81,12 @@ class ProgressBar(object):
     interval : float, optional
         Update (refresh) interval of the progress bar, in
         seconds. Default is 1.0.
+    speed_mode : {"cumulative", "instant"}, optional
+        The mode in which current processing speed is calculated. If
+        "cumulative", the speed is total processed size divided by total
+        time elapsed; if "instant", the speed is size processed since
+        the last update divided by time elapsed since last
+        update. Default is "cumulative", which is more stable.
 
     Attributes
     ----------
@@ -96,6 +102,9 @@ class ProgressBar(object):
         Update (refresh) interval of the progress bar, in
         seconds. Available only during processing (deleted after the
         `finish` call).
+    speed_mode : {"cumulative", "instant"}
+        The mode in which speed is calculated. Available only during
+        processing (deleted after the `finish` call).
     elapsed : float
         Total elapsed time, in seconds. Only available after the
         `finish` call.
@@ -117,17 +126,22 @@ class ProgressBar(object):
 
     # pylint: disable=too-many-instance-attributes
 
-    def __init__(self, totalsize, interval=_PROGRESS_UPDATE_INTERVAL):
+    def __init__(self, totalsize, interval=_PROGRESS_UPDATE_INTERVAL,
+                 speed_mode="cumulative"):
         """Initialize the ProgressBar class.
 
         See class docstring for parameters of the constructor.
 
         """
 
+        if totalsize <= 0:
+            raise ValueError("total size must be positive; got %d" % totalsize)
+
         self.totalsize = totalsize
         self.processed = 0
         self.start = time.time()
         self.interval = interval
+        self.speed_mode = speed_mode
         self._last = self.start
         self._last_processed = 0
         self.__finished = False
@@ -223,11 +237,10 @@ class ProgressBar(object):
         if self.__finished:
             raise RuntimeError('operation on finished progress bar')
 
-        self.elapsed = time.time() - self.start
-        if self.elapsed < 0.001:
-            self.elapsed = 0.001  # avoid division by zero
+        self.elapsed = max(time.time() - self.start, 0.001)  # avoid division by zero
         del self.processed
         del self.interval
+        del self.speed_mode
         del self._last
         del self._last_processed
 
@@ -267,11 +280,16 @@ class ProgressBar(object):
         if elapsed_since_last < self.interval:
             return
 
-        if elapsed_since_last < 0.001:
-            elapsed_since_last = 0.001  # avoid division by zero
-
-        # speed in the last second, in bytes per second
-        speed = ((self.processed - self._last_processed) / elapsed_since_last)
+        if self.speed_mode == "instant":
+            # speed in the last second, in bytes per second
+            elapsed_since_last = max(elapsed_since_last, 0.001)  # avoid division by zero
+            speed = ((self.processed - self._last_processed) / elapsed_since_last)
+            if speed < 0:
+                speed = 0
+        else:
+            # cumulative speed, in bytes per second
+            elapsed = max(time.time() - self.start, 0.001)  # avoid division by zero
+            speed = self.processed / elapsed
 
         # update last stats for the next update
         self._last = time.time()
@@ -293,8 +311,11 @@ class ProgressBar(object):
         # calculate ETA
         remaining = self.totalsize - self.processed
         # estimate based on current speed
-        eta = remaining / speed
-        eta_s = "ETA %s" % self._humantime(eta)
+        if speed > 0:
+            eta = remaining / speed
+            eta_s = "ETA %s" % self._humantime(eta)
+        else:
+            eta_s = "ETA unknown"
 
         sys.stderr.write(_FORMAT_STRING.format(
             processed_s, elapsed_s, speed_s, bar_s, percent_s, eta_s
