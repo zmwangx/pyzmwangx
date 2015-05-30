@@ -86,7 +86,7 @@ def humansize(size, prefix="iec-i", unit="B", space=False):
     """
 
     if size < 0:
-        raise ValueError("size must be positive")
+        raise ValueError("size must be nonnegative")
     if prefix not in {"iec-i", "iec", "si"}:
         raise ValueError("expected iec-i, iec, or si; %s received" % prefix)
 
