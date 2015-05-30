@@ -2,7 +2,7 @@
 pyzmwangx
 =========
 
-|Build Status|
+|Build Status| |Docs|
 
 This is a collection of small Python utilities used in my day-to-day scripts.
 
@@ -30,3 +30,5 @@ Modules
 
 .. |Build Status| image:: https://travis-ci.org/zmwangx/pyzmwangx.svg?branch=master
    :target: https://travis-ci.org/zmwangx/pyzmwangx
+.. |Docs| image:: https://readthedocs.org/projects/pyzmwangx/badge/?version=latest
+   :target: https://pyzmwangx.readthedocs.org/

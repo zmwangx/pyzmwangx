@@ -7,6 +7,9 @@ pyzmwangx
    <a href="https://travis-ci.org/zmwangx/pyzmwangx" target="_blank">
      <img src="https://travis-ci.org/zmwangx/pyzmwangx.svg?branch=master" alt="Build Status" />
    </a>
+   <a href="https://pyzmwangx.readthedocs.org/" target="_blank">
+     <img src="https://readthedocs.org/projects/pyzmwangx/badge/?version=latest" alt="Build Status" />
+   </a>
    </p>
 
 This is a collection of small Python utilities used in my day-to-day scripts.
