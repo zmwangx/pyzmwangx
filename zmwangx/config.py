@@ -49,7 +49,6 @@ class Config(object):
     def __init__(self, config_path, allow_missing=False):
         """Init."""
         self._get_config_file(config_path, allow_missing)
-        self._conf = None
         self._get_configs()
 
     def _get_config_file(self, config_path, allow_missing):
@@ -75,6 +74,7 @@ class Config(object):
         This method should be overrided.
 
         """
+        self._conf = None
         raise NotImplementedError
 
     def rewrite_configs(self):
