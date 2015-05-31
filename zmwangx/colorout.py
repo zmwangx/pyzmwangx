@@ -151,6 +151,15 @@ def cprompt(prompt, info=None, allow_empty=False, color="green"):
     parameter dictates whether empty input is allowed; if False, this
     function loops on empty input.
 
+    Returns
+    -------
+    user_input : str
+
+    Raises
+    ------
+    EOFError
+        If EOF is encountered before user input is read.
+
     """
     with open("/dev/tty", "w", encoding="utf-8") as devtty:
         if info is not None:
@@ -205,9 +214,14 @@ def cyesno(info=None, prompt="Continue? [yN] ", default="n", color="yellow"):
 
     Returns
     -------
-    boolean
+    bool
         ``True`` if the interpreted response is "yes", ``False``
         otherwise.
+
+    Raises
+    ------
+    EOFError:
+        If EOF is encountered before user input is read.
 
     """
     with open("/dev/tty", "w", encoding="utf-8") as devtty:
