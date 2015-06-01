@@ -78,6 +78,10 @@ class ProgressBar(object):
     ----------
     totalsize : int
         Total size, in bytes, of the file/stream to be processed.
+    preprocessed : int, optional
+        Size of preprocessed portion, in bytes. The preprocessed portion
+        counts towards the percentage processed, but does not count
+        towards speed. Default is ``0``.
     interval : float, optional
         Update (refresh) interval of the progress bar, in
         seconds. Default is 1.0.
@@ -126,8 +130,8 @@ class ProgressBar(object):
 
     # pylint: disable=too-many-instance-attributes
 
-    def __init__(self, totalsize, interval=_PROGRESS_UPDATE_INTERVAL,
-                 speed_mode="cumulative"):
+    def __init__(self, totalsize, preprocessed=0,
+                 interval=_PROGRESS_UPDATE_INTERVAL, speed_mode="cumulative"):
         """Initialize the ProgressBar class.
 
         See class docstring for parameters of the constructor.
@@ -138,7 +142,8 @@ class ProgressBar(object):
             raise ValueError("total size must be positive; got %d" % totalsize)
 
         self.totalsize = totalsize
-        self.processed = 0
+        self.processed = preprocessed
+        self.preprocessed = preprocessed
         self.start = time.time()
         self.interval = interval
         self.speed_mode = speed_mode
@@ -157,6 +162,8 @@ class ProgressBar(object):
             # case, Assume a minimum of 80 columns.
             ncol = 80
         self._barlen = (ncol - 48) if ncol >= 58 else 10
+
+        self._update_output(force=True)
 
     def update(self, chunk_size):
         """Update the progress bar for a newly processed chunk.
@@ -248,7 +255,8 @@ class ProgressBar(object):
 
         processed_s = zmwangx.humansize.humansize(self.totalsize)
         elapsed_s = self._humantime(self.elapsed)
-        speed_s = zmwangx.humansize.humansize(self.totalsize / self.elapsed)
+        speed_s = zmwangx.humansize.humansize(
+            (self.totalsize - self.preprocessed) / self.elapsed)
         bar_s = '=' * (self._barlen - 1) + '>'
         percent_s = '100'
         eta_s = ' ' * 11
@@ -258,12 +266,18 @@ class ProgressBar(object):
         sys.stderr.write("\n")
         sys.stderr.flush()
 
-    def _update_output(self):
+    def _update_output(self, force=False):
         """Update the progress bar and surrounding data as appropriate.
 
         Whether the progress bar is refreshed depends on whether we have
         reached the refresh interval since the last refresh (handled
-        automatically).
+        automatically). If ``force`` is set to ``True`` though, the
+        progress bar is refreshed regardless.
+
+        Parameters
+        ----------
+        force : bool, optional
+            Whether to force an update. Default is ``False``.
 
         Raises
         ------
@@ -276,9 +290,10 @@ class ProgressBar(object):
         if self.__finished:
             raise RuntimeError('operation on finished progress bar')
 
-        elapsed_since_last = time.time() - self._last
-        if elapsed_since_last < self.interval:
-            return
+        if not force:
+            elapsed_since_last = time.time() - self._last
+            if elapsed_since_last < self.interval:
+                return
 
         if self.speed_mode == "instant":
             # speed in the last second, in bytes per second
@@ -289,7 +304,7 @@ class ProgressBar(object):
         else:
             # cumulative speed, in bytes per second
             elapsed = max(time.time() - self.start, 0.001)  # avoid division by zero
-            speed = self.processed / elapsed
+            speed = (self.processed - self.preprocessed) / elapsed
 
         # update last stats for the next update
         self._last = time.time()

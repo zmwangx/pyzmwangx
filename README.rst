@@ -22,8 +22,8 @@ This will install the ``zmwangx`` package.
 Modules
 -------
 
-* ``colorout``: colorize stdout and stderr.
-* ``config``: read and writ config files of various common formats.
+* ``colorout``: colorized output to stdout and stderr, and much more.
+* ``config``: read and write config files of various common formats.
 * ``hash``: hash files in a memory-efficient manner.
 * ``humansize``: convert size in bytes to human readable string (IEC or SI). Installs a console script ``humansize``.
 * ``humantime``: convert duration in seconds to human readable string. Installs a console script ``humantime``.
