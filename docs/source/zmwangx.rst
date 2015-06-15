@@ -8,6 +8,7 @@ Submodules
 
    zmwangx.colorout
    zmwangx.config
+   zmwangx.ezlog
    zmwangx.hash
    zmwangx.humansize
    zmwangx.humantime

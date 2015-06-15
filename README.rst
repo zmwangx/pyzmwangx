@@ -4,6 +4,8 @@ pyzmwangx
 
 |Build Status| |Docs|
 
+*Caution: This package is Python 3.3+ only.*
+
 This is a collection of small Python utilities used in my day-to-day scripts.
 
 API doc is hosted on `Read the Docs <https://pyzmwangx.readthedocs.org/>`_.
@@ -24,6 +26,7 @@ Modules
 
 * ``colorout``: colorized output to stdout and stderr, and much more.
 * ``config``: read and write config files of various common formats.
+* ``ezlog``: easy logging setup (both to file and to console).
 * ``hash``: hash files in a memory-efficient manner.
 * ``humansize``: convert size in bytes to human readable string (IEC or SI). Installs a console script ``humansize``.
 * ``humantime``: convert duration in seconds to human readable string. Installs a console script ``humantime``.
