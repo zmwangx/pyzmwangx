@@ -47,7 +47,7 @@ The data are scraped from w3schools.com on 2015-05-09.
 """
 
 def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
-            deduplicate=True):
+            deduplicate=True, session=None):
     """Extract URLs matching a pattern from an HTML document.
 
     The HTML document is either passed in in full as a string (the
@@ -91,6 +91,9 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
     deduplicate : str, optional
         Deduplicate matching URLs and only keep the first occurrence of
         each unique URL. Default is ``True``.
+    session : requests.Session, optional
+        If not ``None``, make HTTP requests within this session. Default
+        is ``None``.
 
     Returns
     -------
@@ -124,7 +127,10 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
     elif url is not None:
         if not urlscheme.match(url):
             url = "http://%s" % url
-        request = requests.get(url)
+        if session is None:
+            request = requests.get(url)
+        else:
+            request = session.get(url)
         content = request.content
         base = request.url
     else:
