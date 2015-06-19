@@ -60,34 +60,34 @@ def _fileobj_size(fileobj):
         return None
 
 def _fileobj_hash(fileobj, algorithm="sha1", chunk_size=DEFAULT_CHUNK_SIZE,
-                  show_progress_bar=False, total_size=None):
+                  show_progress=False, total_size=None):
     """Calculate the hash of a file object.
 
     See documentation of `file_hash` for details. The only difference is
     that the ``fileobj`` parameter can only be a file-like object.
 
     """
-    if show_progress_bar and total_size is None:
+    if show_progress and total_size is None:
         total_size = _fileobj_size(fileobj)
         if total_size is None:
             logging.warn("cannot determine the size of the file object; "
                          "progress bar not shown")
-            show_progress_bar = False
+            show_progress = False
 
-    if show_progress_bar:
+    if show_progress:
         pbar = zmwangx.pbar.ProgressBar(total_size)
     hashalg = hashlib.new(algorithm)
     for chunk in chunks(fileobj, chunk_size=chunk_size):
         hashalg.update(chunk)
-        if show_progress_bar:
+        if show_progress:
             pbar.update(chunk_size)
-    if show_progress_bar:
+    if show_progress:
         pbar.finish()
 
     return hashalg.hexdigest()
 
 def file_hash(file, algorithm="sha1", chunk_size=DEFAULT_CHUNK_SIZE,
-              show_progress_bar=False, total_size=None):
+              show_progress=False, total_size=None):
     r"""Calculate the hash of a file.
 
     The file object is read into memory in small chunks so as to not to
@@ -103,11 +103,11 @@ def file_hash(file, algorithm="sha1", chunk_size=DEFAULT_CHUNK_SIZE,
         ``hashlib.algorithms_available``. Default is ``"sha1"``.
     chunk_size : int, optional
         Default is ``DEFAULT_CHUNK_SIZE``.
-    show_progress_bar : bool, optional
+    show_progress : bool, optional
         Whether to print progress bar. Default is ``False``.
     total_size : int, optional
         Total size in bytes, used for the progress bar. Only useful when
-        ``show_progress_bar`` is ``True``, and ``file`` is a file-like
+        ``show_progress`` is ``True``, and ``file`` is a file-like
         object. Default is ``None``, in which case the program will try
         to infer the total size.
 
@@ -147,9 +147,9 @@ def file_hash(file, algorithm="sha1", chunk_size=DEFAULT_CHUNK_SIZE,
     """
     if hasattr(file, "read"):
         return _fileobj_hash(file, algorithm, chunk_size,
-                             show_progress_bar, total_size)
+                             show_progress, total_size)
     else:
         total_size = os.path.getsize(file)
         with open(file, "rb") as fileobj:
             return _fileobj_hash(fileobj, algorithm, chunk_size,
-                                 show_progress_bar, total_size)
+                                 show_progress, total_size)
