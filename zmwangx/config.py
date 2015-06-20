@@ -27,6 +27,10 @@ class Config(object):
     ``rewrite_configs`` and ``__setitem__`` if the config file is meant
     to be read-only.
 
+    Note that the attributes and methods of ``_conf`` are exposed
+    through ``self`` in case it is neither already an instance attribute
+    of ``self`` nor implemented in the class tree of ``self``.
+
     Parameters
     ----------
     config_path : str
@@ -93,6 +97,14 @@ class Config(object):
         """Assignment to self[key]."""
         self._conf[key] = value
 
+    def __getattr__(self, name):
+        """Access to self._conf attributes."""
+        try:
+            if name == "_conf":
+                raise AttributeError
+            return getattr(self._conf, name)
+        except AttributeError:
+            raise
 
 class INIConfig(Config):
     """Class for reading and writing INI config file.
@@ -105,8 +117,11 @@ class INIConfig(Config):
 
     An instance of this class supports access and assignment via
     subscripts just like a standard library
-    ``configparser.ConfigParser`` object. To access more advanced
-    ``ConfigParser`` methods, use the `config` attribute.
+    ``configparser.ConfigParser`` object. Other methods of
+    ``configparser.ConfigParser`` are also supported (e.g.,
+    ``has_section``). See
+    https://docs.python.org/3/library/configparser.html#configparser-objects
+    for details.
 
     Attributes
     ----------
