@@ -43,7 +43,7 @@ setuptools.setup(
     packages=['zmwangx'],
     install_requires=[
         'PyYAML',
-        'beautifulsoup4',
+        'beautifulsoup4>=4.4.0',
         'requests',
     ],
     extras_require={
