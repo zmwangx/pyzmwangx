@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.humantime module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.infrastructure module" href="zmwangx.infrastructure.html" >
+    <link rel="prev" title="zmwangx.humansize module" href="zmwangx.humansize.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.infrastructure.html" title="zmwangx.infrastructure module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.humansize.html" title="zmwangx.humansize module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.humantime">
+<span id="zmwangx-humantime-module"></span><h1>zmwangx.humantime module<a class="headerlink" href="#module-zmwangx.humantime" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="zmwangx.humantime.humantime">
+<tt class="descclassname">zmwangx.humantime.</tt><tt class="descname">humantime</tt><big>(</big><em>seconds</em>, <em>ndigits=0</em>, <em>one_hour_digit=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humantime.py#L7"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humantime.humantime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format a duration as a human readable string.</p>
+<p>The duration in seconds (a nonnegative float) is formatted as
+<tt class="docutils literal"><span class="pre">HH:MM:SS.frac</span></tt>, where the number of fractional digits is
+controlled by <cite>ndigits</cite>; if <cite>ndigits</cite> is 0, the decimal point is not
+printed. The number of hour digits (<tt class="docutils literal"><span class="pre">HH</span></tt>) can be reduced to one
+with the <cite>one_hour_digits</cite> option.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seconds</strong> : float</p>
+<blockquote>
+<div><p>Duration in seconds, must be nonnegative.</p>
+</div></blockquote>
+<p><strong>ndigits</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of digits after the decimal point for the seconds part.
+Default is 0. If 0, the decimal point is suppressed.</p>
+</div></blockquote>
+<p><strong>one_hour_digit</strong> : bool, optional</p>
+<blockquote>
+<div><p>If <tt class="docutils literal"><span class="pre">True</span></tt>, only print one hour digit (e.g., nine hours is
+printed as 9:00:00.00). Default is <tt class="docutils literal"><span class="pre">False</span></tt>, i.e., two hour
+digits (nine hours is printed as 09:00:00.00).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>human_readable_duration</strong> : str</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError:</strong></p>
+<blockquote class="last">
+<div><p>If <cite>seconds</cite> is negative.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="mf">10.55</span><span class="p">)</span>
+<span class="go">&#39;00:00:11&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="mf">10.55</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;00:00:10.6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="mf">10.55</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;00:00:10.55&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="mf">10.55</span><span class="p">,</span> <span class="n">one_hour_digit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&#39;0:00:11&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># two hours digits for &gt;= 10 hours, even if one_hour_digit is</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># set to True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="mi">86400</span><span class="p">,</span> <span class="n">one_hour_digit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&#39;24:00:00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humantime</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">ValueError</span>: <span class="n">seconds=-1.000000 is negative, expected nonnegative value</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.humantime.main">
+<tt class="descclassname">zmwangx.humantime.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humantime.py#L75"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humantime.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>CLI interface.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.humansize.html"
+                        title="previous chapter">zmwangx.humansize module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.infrastructure.html"
+                        title="next chapter">zmwangx.infrastructure module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.humantime.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

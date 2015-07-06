@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.ezlog module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.hash module" href="zmwangx.hash.html" >
+    <link rel="prev" title="zmwangx.config module" href="zmwangx.config.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.hash.html" title="zmwangx.hash module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.config.html" title="zmwangx.config module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.ezlog">
+<span id="zmwangx-ezlog-module"></span><h1>zmwangx.ezlog module<a class="headerlink" href="#module-zmwangx.ezlog" title="Permalink to this headline">¶</a></h1>
+<p>Easy logging setup.</p>
+<p>This module only provides a one-stop setup. To actually log entries, use
+the standard logging.info, logging.debug, etc.</p>
+<dl class="function">
+<dt id="zmwangx.ezlog.logging_setup">
+<tt class="descclassname">zmwangx.ezlog.</tt><tt class="descname">logging_setup</tt><big>(</big><em>name</em>, <em>destination='data'</em>, <em>level='info'</em>, <em>console_level='warning'</em>, <em>entryfmt='%(asctime)s %(levelname)s %(message)s'</em>, <em>datefmt='%Y-%m-%dT%H:%M:%S%z'</em>, <em>console_entryfmt='%(levelname)-8s %(message)s'</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/ezlog.py#L19"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.ezlog.logging_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up logging to both console and file.</p>
+<p>The log file is located in <tt class="docutils literal"><span class="pre">$XDG_DATA_HOME</span></tt> or <tt class="docutils literal"><span class="pre">$XDG_CACHE_HOME</span></tt>
+(<tt class="docutils literal"><span class="pre">~/.local/share</span></tt> or <tt class="docutils literal"><span class="pre">~/.cache</span></tt> if the corresponding environment
+variables are not set), based on your choice of <tt class="docutils literal"><span class="pre">destination</span></tt>. For
+instance, if your program has <tt class="docutils literal"><span class="pre">name</span></tt> <tt class="docutils literal"><span class="pre">foo</span></tt>, and you choose to
+log to <tt class="docutils literal"><span class="pre">data</span></tt>, then the log file location is most likely
+<tt class="docutils literal"><span class="pre">~/.local/share/foo/foo.log</span></tt>.</p>
+<p>Logging levels and formats are customizable for both console and
+file logging. However, sane defaults have been chosen so you usually
+don&#8217;t need to specify anything other than the program name and
+optionally the destination (as a simple English word).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>The file to log to will be <tt class="docutils literal"><span class="pre">&lt;name&gt;/&lt;name&gt;.log</span></tt> within the
+destination directory (see <tt class="docutils literal"><span class="pre">destination</span></tt>).</p>
+</div></blockquote>
+<p><strong>destination</strong> : {&#8220;data&#8221;, &#8220;cache&#8221;}</p>
+<blockquote>
+<div><p>If destination is <tt class="docutils literal"><span class="pre">&quot;data&quot;</span></tt>, log to a file in
+<tt class="docutils literal"><span class="pre">$XDG_DATA_HOME</span></tt> (or <tt class="docutils literal"><span class="pre">~/.local/share</span></tt>); if destination is
+<tt class="docutils literal"><span class="pre">cache</span></tt>, log to a file in <tt class="docutils literal"><span class="pre">$XDG_CACHE_HOME</span></tt> or
+<tt class="docutils literal"><span class="pre">~/.cache</span></tt>. Default is <tt class="docutils literal"><span class="pre">data</span></tt>.</p>
+</div></blockquote>
+<p><strong>level</strong> : {&#8220;info&#8221;, &#8220;debug&#8221;, &#8220;warning&#8221;, &#8220;error&#8221;, &#8220;critical&#8221;}</p>
+<blockquote>
+<div><p>Logging level to log file. Default is <tt class="docutils literal"><span class="pre">&quot;info&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>console_level</strong> : {&#8220;info&#8221;, &#8220;debug&#8221;, &#8220;warning&#8221;, &#8220;error&#8221;, &#8220;critical&#8221;, None}</p>
+<blockquote>
+<div><p>Logging level to console. Default is <tt class="docutils literal"><span class="pre">&quot;warning&quot;</span></tt>. Set to
+<tt class="docutils literal"><span class="pre">None</span></tt> to turn off logging to console.</p>
+</div></blockquote>
+<p><strong>entryfmt</strong> : str</p>
+<blockquote>
+<div><p>Log entry format, passed to the <tt class="docutils literal"><span class="pre">format</span></tt> argument of
+<tt class="docutils literal"><span class="pre">logging.basicConfig</span></tt>. Default is
+<tt class="docutils literal"><span class="pre">&quot;%(asctime)s</span> <span class="pre">%(levelname)s</span> <span class="pre">%(message)s&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>datefmt</strong> : str</p>
+<blockquote>
+<div><p>Date format, passed to the <tt class="docutils literal"><span class="pre">datefmt</span></tt> argument of
+<tt class="docutils literal"><span class="pre">logging.basicConfig</span></tt>. Default is <tt class="docutils literal"><span class="pre">&quot;%Y-%m-%dT%H:%M:%S%z&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>console_entryfmt</strong> : str</p>
+<blockquote class="last">
+<div><p>Console log entry format. Default is
+<tt class="docutils literal"><span class="pre">&quot;%(levelname)-8s</span> <span class="pre">%(message)s&quot;</span></tt>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.config.html"
+                        title="previous chapter">zmwangx.config module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.hash.html"
+                        title="next chapter">zmwangx.hash module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.ezlog.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

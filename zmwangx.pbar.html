@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.pbar module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.urlgrep module" href="zmwangx.urlgrep.html" >
+    <link rel="prev" title="zmwangx.infrastructure module" href="zmwangx.infrastructure.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.urlgrep.html" title="zmwangx.urlgrep module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.infrastructure.html" title="zmwangx.infrastructure module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.pbar">
+<span id="zmwangx-pbar-module"></span><h1>zmwangx.pbar module<a class="headerlink" href="#module-zmwangx.pbar" title="Permalink to this headline">¶</a></h1>
+<p>Progress bar or progress text.</p>
+<dl class="class">
+<dt id="zmwangx.pbar.ProgressBar">
+<em class="property">class </em><tt class="descclassname">zmwangx.pbar.</tt><tt class="descname">ProgressBar</tt><big>(</big><em>totalsize</em>, <em>preprocessed=0</em>, <em>interval=1.0</em>, <em>speed_mode='cumulative'</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L239"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zmwangx.pbar.ProgressText" title="zmwangx.pbar.ProgressText"><tt class="xref py py-class docutils literal"><span class="pre">zmwangx.pbar.ProgressText</span></tt></a></p>
+<p>Progress bar for file processing.</p>
+<p>To generate a progress bar, init a ProgressBar instance, then update
+frequently with the <cite>update</cite> method, passing in the size of newly
+processed chunk. The <cite>force_update</cite> method should only be called if
+you want to overwrite the processed size, which is automatically
+calculated incrementally. After you finish processing the
+file/stream, you must call the <cite>finish</cite> method to wrap it up. Any
+further calls after the <cite>finish</cite> method has been called lead to
+a <tt class="docutils literal"><span class="pre">RuntimeError</span></tt>.</p>
+<p>Each ProgressBar instance defines several public attributes listed
+below. Some are available during processing, and some after
+processing. These attributes are meant for informational purposes,
+and you should not manually tamper with them (which mostly likely
+leads to undefined behavior).</p>
+<p>The progress bar format is inspired by <tt class="docutils literal"><span class="pre">pv(1)</span></tt> (pipe viewer).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>totalsize</strong> : int</p>
+<blockquote>
+<div><p>Total size, in bytes, of the file/stream to be processed.</p>
+</div></blockquote>
+<p><strong>preprocessed</strong> : int, optional</p>
+<blockquote>
+<div><p>Size of preprocessed portion, in bytes. The preprocessed portion
+counts towards the percentage processed, but does not count
+towards speed. Default is <tt class="docutils literal"><span class="pre">0</span></tt>.</p>
+</div></blockquote>
+<p><strong>interval</strong> : float, optional</p>
+<blockquote>
+<div><p>Update (refresh) interval of the progress bar, in
+seconds. Default is 1.0.</p>
+</div></blockquote>
+<p><strong>speed_mode</strong> : {&#8220;cumulative&#8221;, &#8220;instant&#8221;}, optional</p>
+<blockquote class="last">
+<div><p>The mode in which current processing speed is calculated. If
+&#8220;cumulative&#8221;, the speed is total processed size divided by total
+time elapsed; if &#8220;instant&#8221;, the speed is size processed since
+the last update divided by time elapsed since last
+update. Default is &#8220;cumulative&#8221;, which is more stable.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>For developers: ProgressBar also defines three private attributes,
+<cite>_last</cite>, <cite>_last_processed</cite> and <cite>_barlen</cite>, during processing (deleted
+after the <cite>finish</cite> call). <cite>_last</cite> stores the absolute time of last
+update (refresh), <cite>_last_processed</cite> stores the processed size at the
+time of the last update (refresh), and <cite>_barlen</cite> stores the length
+of the progress bar (only the bar portion).</p>
+<p>There is another private attribute <cite>_finished</cite> (bool) keeping track
+of whether <cite>finish</cite> has been called. Do not tamper with this
+attribute manually.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>totalsize</td>
+<td>(int) Total size of file/stream, in bytes. Available throughout.</td>
+</tr>
+<tr class="row-even"><td>processed</td>
+<td>(int) Process size. Available only during processing (deleted after the <cite>finish</cite> call).</td>
+</tr>
+<tr class="row-odd"><td>start</td>
+<td>(float) Starting time (an absolute time returned by <tt class="docutils literal"><span class="pre">time.time()</span></tt>). Available throughout.</td>
+</tr>
+<tr class="row-even"><td>interval</td>
+<td>(float) Update (refresh) interval of the progress bar, in seconds. Available only during processing (deleted after the <cite>finish</cite> call).</td>
+</tr>
+<tr class="row-odd"><td>speed_mode</td>
+<td>({&#8220;cumulative&#8221;, &#8220;instant&#8221;}) The mode in which speed is calculated. Available only during processing (deleted after the <cite>finish</cite> call).</td>
+</tr>
+<tr class="row-even"><td>elapsed</td>
+<td>(float) Total elapsed time, in seconds. Only available after the <cite>finish</cite> call.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zmwangx.pbar.ProgressBar.finish">
+<tt class="descname">finish</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L415"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressBar.finish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finish file progressing and wrap up on the progress bar.</p>
+<p>Always call this method exactly once after you finish
+processing. This method adds the finishing touches to the
+progress bar, deletes several attributes (<cite>processed</cite>,
+<cite>interval</cite>, etc.), and adds a new attribute (<cite>elapsed</cite>).
+After <cite>finish</cite> is called on a ProgressBar instance, it enters a
+read-only mode: you may read the <cite>totalsize</cite>, <cite>start</cite>, and
+<cite>elapsed</cite> attributes, but any method call leads to a
+<tt class="docutils literal"><span class="pre">RuntimeError</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>RuntimeError:</strong></p>
+<blockquote class="last">
+<div><p>If <cite>finish</cite> has already been called on the ProgressBar
+instance before.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.pbar.ProgressBar.force_update">
+<tt class="descname">force_update</tt><big>(</big><em>processed_size</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L389"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressBar.force_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Force update the progress bar with a given processed size.</p>
+<p>The <cite>processed</cite> attribute is overwritten by the new value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>processed_size :</strong></p>
+<blockquote>
+<div><p>Processed size of the file/stream, in bytes. Existing value
+is overwritten by this value.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>RuntimeError:</strong></p>
+<blockquote class="last">
+<div><p>If <cite>finish</cite> has been called on the ProgressBar instance.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.pbar.ProgressBar.update">
+<tt class="descname">update</tt><big>(</big><em>chunk_size</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L360"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressBar.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the progress bar for a newly processed chunk.</p>
+<p>The size of the processed chunk is registered. Whether the
+progress bar is refreshed depends on whether we have reached the
+refresh interval since the last refresh (handled automatically).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>chunk_size</strong> : int</p>
+<blockquote>
+<div><p>The size of the newly processed chunk (since last update),
+in bytes. This size will be added to the <cite>processed</cite>
+attribute.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>RuntimeError:</strong></p>
+<blockquote class="last">
+<div><p>If <cite>finish</cite> has been called on the ProgressBar instance.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zmwangx.pbar.ProgressText">
+<em class="property">class </em><tt class="descclassname">zmwangx.pbar.</tt><tt class="descname">ProgressText</tt><big>(</big><em>interval=0.1</em>, <em>show_elapsed_time=True</em>, <em>init_text=''</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L44"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Print textual progress information.</p>
+<p>To use this class, init a <tt class="docutils literal"><span class="pre">ProgressText</span></tt> instance, then update the
+progress text with the <cite>text</cite> method. The <cite>text</cite> method takes a
+textual string or a function to generate the textual string, and
+arguments and keyword arguments to the function can be passed via
+<cite>text</cite>. After you finish progressing, you must call the <cite>finish</cite>
+method to wrap it up. Any further calls after the <cite>finish</cite> method
+has been called lead to a <tt class="docutils literal"><span class="pre">RuntimeError</span></tt>.</p>
+<p>Each ProgressText instance defines several public attributes listed
+below. Some are available during processing, and some after
+processing. These attributes are meant for informational purposes,
+and you should not manually tamper with them (which mostly likely
+leads to undefined behavior).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>interval</strong> : float, optional</p>
+<blockquote>
+<div><p>Update (refresh) interval of the progress bar, in
+seconds. Default is 1.0.</p>
+</div></blockquote>
+<p><strong>show_elapsed_time</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether to prefix textual progress information with elapsed
+time. The prefix is in the form <tt class="docutils literal"><span class="pre">H:MM:SS:</span> <span class="pre">``.</span> <span class="pre">Default</span> <span class="pre">is</span>
+<span class="pre">``True</span></tt>.</p>
+</div></blockquote>
+<p><strong>init_text</strong> : str, optional</p>
+<blockquote class="last">
+<div><p>Initial text to print. Default is <tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>For developers: ProgressText also defines a private attribute
+<tt class="docutils literal"><span class="pre">_last</span></tt> during processing (deleted after the <cite>finish</cite> call) which
+stores the absolute time of last update (refresh).</p>
+<p>There is another private attribute <tt class="docutils literal"><span class="pre">_finished</span></tt> (bool) keeping
+track of whether <cite>finish</cite> has been called. Do not tamper with this
+attribute manually.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>start</td>
+<td>(float) Starting time (an absolute time returned by <tt class="docutils literal"><span class="pre">time.time()</span></tt>). Available throughout.</td>
+</tr>
+<tr class="row-even"><td>interval</td>
+<td>(float) Update (refresh) interval of the progress bar, in seconds. Available only during processing (deleted after the <cite>finish</cite> call).</td>
+</tr>
+<tr class="row-odd"><td>show_elapsed_time</td>
+<td>(bool) Whether to prefix textual progress information with elapsed time. Available only during processing (deleted after the <cite>finish</cite> call).</td>
+</tr>
+<tr class="row-even"><td>elapsed</td>
+<td>(float) Total elapsed time, in seconds. Only available after the <cite>finish</cite> call.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zmwangx.pbar.ProgressText.finish">
+<tt class="descname">finish</tt><big>(</big><em>content</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressText.finish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add finishing touches to the progress output.</p>
+<p>Always call this method exactly once after you finish
+processing. This method adds the finishing touches to the
+progress output, deletes several attributes (<cite>interval</cite>,
+<cite>show_elapsed_time</cite>, etc.), and adds a new attribute
+(<cite>elapsed</cite>).  After <cite>finish</cite> is called on a ProgressText
+instance, it enters a read-only mode: you may read the <cite>start</cite>
+and <cite>elapsed</cite> attributes, but any method call leads to a
+<tt class="docutils literal"><span class="pre">RuntimeError</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>finish_text</strong> : str or function</p>
+<blockquote>
+<div><p>Finishing text. Similar to the <tt class="docutils literal"><span class="pre">content</span></tt> argument of
+the <tt class="docutils literal"><span class="pre">update</span></tt> method.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>RuntimeError:</strong></p>
+<blockquote>
+<div><p>If <cite>finish</cite> has already been called on the ProgressText
+instance before.</p>
+</div></blockquote>
+<p><strong>*args</strong></p>
+<blockquote>
+<div><p>Arguments passed to <tt class="docutils literal"><span class="pre">content</span></tt>, if it is callable.</p>
+</div></blockquote>
+<p><strong>**kwargs</strong></p>
+<blockquote class="last">
+<div><p>Keyword arguments to <tt class="docutils literal"><span class="pre">content</span></tt>, if it is callable.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.pbar.ProgressText.text">
+<tt class="descname">text</tt><big>(</big><em>content</em>, <em>*args</em>, <em>force=False</em>, <em>**kwargs</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L120"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.ProgressText.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update progress text.</p>
+<p>Whether the progress text is redrawn or not depends on whether
+we have reached the refresh interval since the last refresh
+(handled automatically).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>content</strong> : str or function</p>
+<blockquote>
+<div><p>If <tt class="docutils literal"><span class="pre">content</span></tt> is <tt class="docutils literal"><span class="pre">str</span></tt>, it will be the content printed to
+the user (optionally prefixed by time elapsed, if
+<tt class="docutils literal"><span class="pre">show_elapsed_time</span></tt> is set to <tt class="docutils literal"><span class="pre">True</span></tt> in <tt class="docutils literal"><span class="pre">__init__</span></tt>).</p>
+<p>Otherwise, <tt class="docutils literal"><span class="pre">content</span></tt> is taken to be a callable function or
+method, and the content to be printed to the user
+(optionally prefixed by time elapsed) is generated
+dynamically by calling <tt class="docutils literal"><span class="pre">content(*args,</span> <span class="pre">**kwargs)</span></tt>.</p>
+<p>Caution: <tt class="docutils literal"><span class="pre">content</span></tt> is only called after a decision to
+redraw is made, so it might be called every time <tt class="docutils literal"><span class="pre">update</span></tt>
+is called.</p>
+</div></blockquote>
+<p><strong>*args</strong></p>
+<blockquote>
+<div><p>Arguments passed to <tt class="docutils literal"><span class="pre">content</span></tt>, if it is callable.</p>
+</div></blockquote>
+<p><strong>force</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether to disregard the refresh interval and force
+a redraw. Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
+</div></blockquote>
+<p><strong>**kwargs</strong></p>
+<blockquote>
+<div><p>Keyword arguments to <tt class="docutils literal"><span class="pre">content</span></tt>, if it is callable.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>RuntimeError:</strong></p>
+<blockquote class="last">
+<div><p>If <cite>finish</cite> has been called on the ProgressText instance.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.pbar.autopbar">
+<tt class="descclassname">zmwangx.pbar.</tt><tt class="descname">autopbar</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/pbar.py#L15"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.pbar.autopbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if it is desirable to print a progress bar.</p>
+<p>Returns True if the process has a stderr connected to a tty, and the
+process is in foreground.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.infrastructure.html"
+                        title="previous chapter">zmwangx.infrastructure module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.urlgrep.html"
+                        title="next chapter">zmwangx.urlgrep module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.pbar.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

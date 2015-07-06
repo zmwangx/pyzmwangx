@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.humansize module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.humantime module" href="zmwangx.humantime.html" >
+    <link rel="prev" title="zmwangx.hash module" href="zmwangx.hash.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.humantime.html" title="zmwangx.humantime module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.hash.html" title="zmwangx.hash module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.humansize">
+<span id="zmwangx-humansize-module"></span><h1>zmwangx.humansize module<a class="headerlink" href="#module-zmwangx.humansize" title="Permalink to this headline">¶</a></h1>
+<p>Convert size in bytes to human readable format.</p>
+<dl class="function">
+<dt id="zmwangx.humansize.humansize">
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">humansize</tt><big>(</big><em>size</em>, <em>prefix='iec-i'</em>, <em>unit='B'</em>, <em>space=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.humansize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert size in number of bytes to human readable format.</p>
+<p>Always display at least three significant figures. Size is rounded
+<em>upward</em> whenever rounding is needed. Therefore, 1001 bytes, being
+1.001 kilobyte, is rounded to 1.01 KB.</p>
+<p>Although this function is usually used for size in bytes,
+technically it can be used for converting any number in any unit
+system to using the SI or IEC prefixes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>size</strong> : int</p>
+<blockquote>
+<div><p>Integer to be converted. Must be nonnegative.</p>
+</div></blockquote>
+<p><strong>prefix</strong> : {&#8220;iec-i&#8221;, &#8220;iec&#8221;, &#8220;si&#8221;}, optional</p>
+<blockquote>
+<div><p>Prefix system to use. <tt class="docutils literal"><span class="pre">&quot;iec-i&quot;</span></tt> results in unit prefixes like
+<tt class="docutils literal"><span class="pre">&quot;Ki&quot;</span></tt> (2^10), <tt class="docutils literal"><span class="pre">&quot;Mi&quot;</span></tt> (2^20), <tt class="docutils literal"><span class="pre">&quot;Gi&quot;</span></tt> (2^30), etc.;
+<tt class="docutils literal"><span class="pre">&quot;iec&quot;</span></tt> results in prefixes like <tt class="docutils literal"><span class="pre">&quot;K&quot;</span></tt> (2^10), <tt class="docutils literal"><span class="pre">&quot;M&quot;</span></tt>
+(2^20), <tt class="docutils literal"><span class="pre">&quot;G&quot;</span></tt> (2^30); <tt class="docutils literal"><span class="pre">&quot;si&quot;</span></tt> results in prefixes like
+<tt class="docutils literal"><span class="pre">&quot;K&quot;</span></tt> (10^3), <tt class="docutils literal"><span class="pre">&quot;M&quot;</span></tt> (10^6), <tt class="docutils literal"><span class="pre">&quot;G&quot;</span></tt> (10^9). Default is
+<tt class="docutils literal"><span class="pre">&quot;iec-i&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>unit</strong> : str, optional</p>
+<blockquote>
+<div><p>Unit to attach to the prefix. Default is <tt class="docutils literal"><span class="pre">&quot;B&quot;</span></tt> for byte. You
+may use empty string to leave out the <tt class="docutils literal"><span class="pre">B</span></tt>.</p>
+</div></blockquote>
+<p><strong>space</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether to print a space between the number and the prefixed
+unit. Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">314</span><span class="p">)</span>
+<span class="go">&#39;314B&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">3141</span><span class="p">)</span>
+<span class="go">&#39;3.07KiB&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">31415</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;iec&quot;</span><span class="p">)</span>
+<span class="go">&#39;30.7KB&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">314159</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;si&quot;</span><span class="p">)</span>
+<span class="go">&#39;315KB&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">3141592</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="go">&#39;3.00Mi&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">31415926</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&#39;30.0 MiB&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.humansize.main">
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L113"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>CLI interface.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.humansize.round_up">
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">round_up</tt><big>(</big><em>number</em>, <em>ndigits=0</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L9"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.round_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round a nonnegative number upward to a given precision.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number</strong> : float</p>
+<blockquote>
+<div><p>The number to be rounded.</p>
+</div></blockquote>
+<p><strong>ndigits</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of decimal digits to round to. Default is 0.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.hash.html"
+                        title="previous chapter">zmwangx.hash module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.humantime.html"
+                        title="next chapter">zmwangx.humantime module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.humansize.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

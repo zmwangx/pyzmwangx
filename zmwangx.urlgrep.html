@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.urlgrep module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="prev" title="zmwangx.pbar module" href="zmwangx.pbar.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.pbar.html" title="zmwangx.pbar module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.urlgrep">
+<span id="zmwangx-urlgrep-module"></span><h1>zmwangx.urlgrep module<a class="headerlink" href="#module-zmwangx.urlgrep" title="Permalink to this headline">¶</a></h1>
+<p>Extract URLs from HTML documents.</p>
+<dl class="function">
+<dt id="zmwangx.urlgrep.main">
+<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>CLI interface.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.urlgrep.urlgrep">
+<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">urlgrep</tt><big>(</big><em>pattern=None</em>, <em>content=None</em>, <em>filepath=None</em>, <em>url=None</em>, <em>base=None</em>, <em>deduplicate=True</em>, <em>session=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L49"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.urlgrep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract URLs matching a pattern from an HTML document.</p>
+<p>The HTML document is either passed in in full as a string (the
+<cite>content</cite> parameter), or is read from a local file (the <cite>filepath</cite>
+parameter), or is retrieved from a remote URL (the <cite>url</cite>
+parameter). Only one of the these three &#8211; the first one in
+<cite>content</cite>, <cite>filepath</cite>, and <cite>url</cite> that is not <tt class="docutils literal"><span class="pre">None</span></tt> &#8211; is
+used. One of the three must be specified.</p>
+<p>Sometimes we need a base URL to resolve relative URLs. The <cite>url</cite>
+argument or its redirection (if any) is automatically used as base
+when the document is retrieved from <cite>url</cite>. Otherwise, the <cite>base</cite>
+parameter, if specified and not None, is used. If none of the above
+applies, <tt class="docutils literal"><span class="pre">http://localhost</span></tt> is used as a fallback. Note that the
+HTML <tt class="docutils literal"><span class="pre">&lt;base&gt;</span></tt> tag within the document may change the base URL, and
+that is respected.</p>
+<p>The <cite>pattern</cite> parameter supplies a regex pattern to match parsed
+URLs. Only matching URLs are returned. If no pattern is specified,
+<tt class="docutils literal"><span class="pre">r&quot;^(?!javascript:)&quot;</span></tt> is used to exclude the &#8220;<tt class="docutils literal"><span class="pre">javascript:</span></tt>
+scheme&#8221;. You may supply an empty string if you want to include
+<tt class="docutils literal"><span class="pre">javascript:</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pattern</strong> : str, optional</p>
+<blockquote>
+<div><p>Regex pattern to match parsed URLs against. Default is
+<tt class="docutils literal"><span class="pre">r&quot;^(?!javascript:)&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>content</strong> : bytes or str, optional</p>
+<blockquote>
+<div><p>An HTML document.</p>
+</div></blockquote>
+<p><strong>filepath</strong> : str, optional</p>
+<blockquote>
+<div><p>Path to a local HTML document.</p>
+</div></blockquote>
+<p><strong>url</strong> : str, optional</p>
+<blockquote>
+<div><p>URL pointing to an HTML document (note that the <tt class="docutils literal"><span class="pre">file</span></tt> scheme
+is not supported by <tt class="docutils literal"><span class="pre">requests</span></tt>). If no scheme is supplied in
+the URL, use <tt class="docutils literal"><span class="pre">http://</span></tt>.</p>
+</div></blockquote>
+<p><strong>base</strong> : str, optional</p>
+<blockquote>
+<div><p>Base URL used for <cite>content</cite> for <cite>filepath</cite>. If no scheme is
+supplied in the URL, use <tt class="docutils literal"><span class="pre">http://</span></tt> (for a local path, use
+<tt class="docutils literal"><span class="pre">file://</span></tt>).</p>
+</div></blockquote>
+<p><strong>deduplicate</strong> : str, optional</p>
+<blockquote>
+<div><p>Deduplicate matching URLs and only keep the first occurrence of
+each unique URL. Default is <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
+</div></blockquote>
+<p><strong>session</strong> : requests.Session, optional</p>
+<blockquote>
+<div><p>If not <tt class="docutils literal"><span class="pre">None</span></tt>, make HTTP requests within this session. Default
+is <tt class="docutils literal"><span class="pre">None</span></tt>.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>matching_urls</strong> : list</p>
+<blockquote>
+<div><p>List of parsed absolute URLs matching the given pattern.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
+<blockquote>
+<div><p>If content, filepath and url are all None.</p>
+</div></blockquote>
+<p><strong>OSError</strong></p>
+<blockquote>
+<div><p>If failed to open the specified file.</p>
+</div></blockquote>
+<p><strong>requests.exceptions.RequestException</strong></p>
+<blockquote class="last">
+<div><p>If requests fail to retrieve the URL specified.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.pbar.html"
+                        title="previous chapter">zmwangx.pbar module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.urlgrep.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

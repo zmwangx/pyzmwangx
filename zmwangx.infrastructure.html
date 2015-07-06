@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.infrastructure module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.pbar module" href="zmwangx.pbar.html" >
+    <link rel="prev" title="zmwangx.humantime module" href="zmwangx.humantime.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.pbar.html" title="zmwangx.pbar module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.humantime.html" title="zmwangx.humantime module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.infrastructure">
+<span id="zmwangx-infrastructure-module"></span><h1>zmwangx.infrastructure module<a class="headerlink" href="#module-zmwangx.infrastructure" title="Permalink to this headline">¶</a></h1>
+<p>Shared testing infrastructure.</p>
+<dl class="class">
+<dt id="zmwangx.infrastructure.NormalizedStringIO">
+<em class="property">class </em><tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">NormalizedStringIO</tt><big>(</big><em>buffer=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L13"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.NormalizedStringIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">_io.StringIO</span></tt></p>
+<p>StringIO, with write operations normalized to unicode.</p>
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.NormalizedStringIO.normalized">
+<em class="property">static </em><tt class="descname">normalized</tt><big>(</big><em>s</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L21"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.NormalizedStringIO.normalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize string to str.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.NormalizedStringIO.write">
+<tt class="descname">write</tt><big>(</big><em>s</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.NormalizedStringIO.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized write method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.NormalizedStringIO.writelines">
+<tt class="descname">writelines</tt><big>(</big><em>lines</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L36"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.NormalizedStringIO.writelines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Noralized writelines method.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zmwangx.infrastructure.Tee">
+<em class="property">class </em><tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">Tee</tt><big>(</big><em>textio</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L42"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">io.TextIOBase</span></tt></p>
+<p>Duplicate all output to a text stream on a StringIO stream.</p>
+<p>This class implements a write-only (unreadable, unseekable)
+io.TextIOBase based on a given io.TextIOBase stream, and duplicates
+all write operations on a intrinsic StringIO stream. The class can
+be used to tee output, e.g., sys.stderr, to a string. To use this
+class, make normal calls as if it is the base stream, with the
+exception that one can call getvalue() as if it is also a StringIO.</p>
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L62"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zmwangx.infrastructure.Tee.closed">
+<tt class="descname">closed</tt><a class="headerlink" href="#zmwangx.infrastructure.Tee.closed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.detach">
+<tt class="descname">detach</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L70"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.detach" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zmwangx.infrastructure.Tee.encoding">
+<tt class="descname">encoding</tt><a class="headerlink" href="#zmwangx.infrastructure.Tee.encoding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zmwangx.infrastructure.Tee.errors">
+<tt class="descname">errors</tt><a class="headerlink" href="#zmwangx.infrastructure.Tee.errors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.fileno">
+<tt class="descname">fileno</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L81"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.fileno" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.flush">
+<tt class="descname">flush</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L84"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.flush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.getvalue">
+<tt class="descname">getvalue</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L88"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.getvalue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.isatty">
+<tt class="descname">isatty</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L91"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.isatty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.read">
+<em class="property">static </em><tt class="descname">read</tt><big>(</big><em>size</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L94"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.readable">
+<em class="property">static </em><tt class="descname">readable</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L98"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.readable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.readline">
+<em class="property">static </em><tt class="descname">readline</tt><big>(</big><em>size=-1</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.readline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.readlines">
+<em class="property">static </em><tt class="descname">readlines</tt><big>(</big><em>hint=-1</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L106"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.readlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.seek">
+<em class="property">static </em><tt class="descname">seek</tt><big>(</big><em>offset</em>, <em>whence=0</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L110"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.seek" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.seekable">
+<em class="property">static </em><tt class="descname">seekable</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L114"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.seekable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.tell">
+<em class="property">static </em><tt class="descname">tell</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L118"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.tell" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.truncate">
+<em class="property">static </em><tt class="descname">truncate</tt><big>(</big><em>size=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L122"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.truncate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="zmwangx.infrastructure.Tee.writable">
+<em class="property">static </em><tt class="descname">writable</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L126"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.writable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.write">
+<tt class="descname">write</tt><big>(</big><em>s</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L131"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zmwangx.infrastructure.Tee.writelines">
+<tt class="descname">writelines</tt><big>(</big><em>lines</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/infrastructure.py#L136"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.Tee.writelines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.infrastructure.capture_stderr">
+<tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">capture_stderr</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/../../../../../../../../../../.pyenv/versions/3.4.3/lib/python3.4/contextlib.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.capture_stderr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single use context manager for capturing stderr in a StringIO.</p>
+<p>The negative effect is that some properties of the stream are
+changed, e.g., isatty().</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.infrastructure.capture_stdout">
+<tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">capture_stdout</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/../../../../../../../../../../.pyenv/versions/3.4.3/lib/python3.4/contextlib.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.capture_stdout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single use context manager for capturing stdout in a StringIO.</p>
+<p>The negative effect is that some properties of the stream are
+changed, e.g., isatty().</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.infrastructure.change_home">
+<tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">change_home</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/../../../../../../../../../../.pyenv/versions/3.4.3/lib/python3.4/contextlib.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.change_home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single use context manager for changing HOME to a temp directory.</p>
+<p>The context manager also temporarily disables XDG_CONFIG_HOME,
+XDG_DATA_HOME, and XDG_CACHE_HOME to avoid reading/writing the wrong
+configs, data files, or cache.</p>
+<p>The temp directory will be empty.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.infrastructure.tee_stderr">
+<tt class="descclassname">zmwangx.infrastructure.</tt><tt class="descname">tee_stderr</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/../../../../../../../../../../.pyenv/versions/3.4.3/lib/python3.4/contextlib.py#L124"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.infrastructure.tee_stderr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single use context manager for teeing stderr to a StringIO.</p>
+<p>Unlike capture_stderr, sys.stderr keeps its original properties,
+except that it is no longer seekable.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.humantime.html"
+                        title="previous chapter">zmwangx.humantime module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.pbar.html"
+                        title="next chapter">zmwangx.pbar module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.infrastructure.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

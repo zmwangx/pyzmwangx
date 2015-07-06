@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.config module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.ezlog module" href="zmwangx.ezlog.html" >
+    <link rel="prev" title="zmwangx.colorout module" href="zmwangx.colorout.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.ezlog.html" title="zmwangx.ezlog module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.colorout.html" title="zmwangx.colorout module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.config">
+<span id="zmwangx-config-module"></span><h1>zmwangx.config module<a class="headerlink" href="#module-zmwangx.config" title="Permalink to this headline">¶</a></h1>
+<p>Reading and writing configuration file.</p>
+<dl class="class">
+<dt id="zmwangx.config.Config">
+<em class="property">class </em><tt class="descclassname">zmwangx.config.</tt><tt class="descname">Config</tt><big>(</big><em>config_path</em>, <em>allow_missing=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L14"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Class for reading and writing config file.</p>
+<p>The config file is either in a subdirectory of $XDG_CONFIG_HOME, if
+it is set, or $HOME/.config.</p>
+<p>This class is meant to be inherited. Configuration file path is
+stored in the <tt class="docutils literal"><span class="pre">_config_file</span></tt> attribute, and the configuration is
+stored in the <tt class="docutils literal"><span class="pre">_conf</span></tt> attribute. A subclass should implement
+<tt class="docutils literal"><span class="pre">_get_configs</span></tt> for initializing <tt class="docutils literal"><span class="pre">_conf</span></tt> from <tt class="docutils literal"><span class="pre">_config_file,</span>
+<span class="pre">``rewrite_configs</span></tt> for updating the config file, and optionally
+override <tt class="docutils literal"><span class="pre">__getitem__</span></tt>, <tt class="docutils literal"><span class="pre">__setitem__</span></tt>, which currently just
+retrieves or assigns to <tt class="docutils literal"><span class="pre">self._conf[key]</span></tt>. Delete
+<tt class="docutils literal"><span class="pre">rewrite_configs</span></tt> and <tt class="docutils literal"><span class="pre">__setitem__</span></tt> if the config file is meant
+to be read-only.</p>
+<p>Note that the attributes and methods of <tt class="docutils literal"><span class="pre">_conf</span></tt> are exposed
+through <tt class="docutils literal"><span class="pre">self</span></tt> in case it is neither already an instance attribute
+of <tt class="docutils literal"><span class="pre">self</span></tt> nor implemented in the class tree of <tt class="docutils literal"><span class="pre">self</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>config_path</strong> : str</p>
+<blockquote>
+<div><p>The path of config file relative to $XDG_CONFIG_HOME, or
+$HOME/.config, if $XDG_CONFIG_HOME is not defined.</p>
+</div></blockquote>
+<p><strong>allow_missing</strong> : bool, optional</p>
+<blockquote>
+<div><p>When the config file cannot be found, if <tt class="docutils literal"><span class="pre">allow_missing</span></tt> is
+<tt class="docutils literal"><span class="pre">True</span></tt>, then silently make the directories and create an empty
+config file; otherwise, raise <tt class="docutils literal"><span class="pre">OSError</span></tt> and the <tt class="docutils literal"><span class="pre">Config</span></tt>
+object won&#8217;t be initiliazed.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>OSError</strong></p>
+<blockquote class="last">
+<div><p>If <tt class="docutils literal"><span class="pre">allow_missing</span></tt> is <tt class="docutils literal"><span class="pre">False</span></tt> and the config file is not
+found.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zmwangx.config.Config.rewrite_configs">
+<tt class="descname">rewrite_configs</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L84"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.Config.rewrite_configs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrite config file with current configs.</p>
+<p>This method should be overrided.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zmwangx.config.INIConfig">
+<em class="property">class </em><tt class="descclassname">zmwangx.config.</tt><tt class="descname">INIConfig</tt><big>(</big><em>config_path</em>, <em>allow_missing=False</em>, <em>**kwargs</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L109"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.INIConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zmwangx.config.Config" title="zmwangx.config.Config"><tt class="xref py py-class docutils literal"><span class="pre">zmwangx.config.Config</span></tt></a></p>
+<p>Class for reading and writing INI config file.</p>
+<p>For basic information, see the docs of <cite>zmwangx.config.Config</cite>.</p>
+<p>In addition to <cite>zmwangx.config.Config</cite> constructor arguments, this
+class also supports <tt class="docutils literal"><span class="pre">**kwargs</span></tt> which will be passed directly to
+the standard library <tt class="docutils literal"><span class="pre">configparser.ConfigParser</span></tt> constructor.</p>
+<p>An instance of this class supports access and assignment via
+subscripts just like a standard library
+<tt class="docutils literal"><span class="pre">configparser.ConfigParser</span></tt> object. Other methods of
+<tt class="docutils literal"><span class="pre">configparser.ConfigParser</span></tt> are also supported (e.g.,
+<tt class="docutils literal"><span class="pre">has_section</span></tt>). See
+<a class="reference external" href="https://docs.python.org/3/library/configparser.html#configparser-objects">https://docs.python.org/3/library/configparser.html#configparser-objects</a>
+for details.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>config</td>
+<td>(configparser.ConfigParser)</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zmwangx.config.INIConfig.rewrite_configs">
+<tt class="descname">rewrite_configs</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L142"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.INIConfig.rewrite_configs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrite config file with current configs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zmwangx.config.JSONConfig">
+<em class="property">class </em><tt class="descclassname">zmwangx.config.</tt><tt class="descname">JSONConfig</tt><big>(</big><em>config_path</em>, <em>allow_missing=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L148"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.JSONConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zmwangx.config.Config" title="zmwangx.config.Config"><tt class="xref py py-class docutils literal"><span class="pre">zmwangx.config.Config</span></tt></a></p>
+<p>Class for reading and writing JSON config file.</p>
+<p>For basic information, see the docs of <cite>zmwangx.config.Config</cite>.</p>
+<p>An instance of this class can be treated like an object returned by
+<tt class="docutils literal"><span class="pre">json.load</span></tt>, supporting both subscripts and item assignment.</p>
+<dl class="method">
+<dt id="zmwangx.config.JSONConfig.rewrite_configs">
+<tt class="descname">rewrite_configs</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L163"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.JSONConfig.rewrite_configs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrite config file with current configs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zmwangx.config.YAMLConfig">
+<em class="property">class </em><tt class="descclassname">zmwangx.config.</tt><tt class="descname">YAMLConfig</tt><big>(</big><em>config_path</em>, <em>allow_missing=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L169"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.YAMLConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zmwangx.config.Config" title="zmwangx.config.Config"><tt class="xref py py-class docutils literal"><span class="pre">zmwangx.config.Config</span></tt></a></p>
+<p>Class for reading and writing YAML config file.</p>
+<p>For basic information, see the docs of <cite>zmwangx.config.Config</cite>.</p>
+<p>An instance of this class can be treated like an object returned by
+<tt class="docutils literal"><span class="pre">yaml.safe_load</span></tt>, supporting both subscripts and item assignment.</p>
+<dl class="method">
+<dt id="zmwangx.config.YAMLConfig.rewrite_configs">
+<tt class="descname">rewrite_configs</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/config.py#L184"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.config.YAMLConfig.rewrite_configs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrite config file with current configs.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.colorout.html"
+                        title="previous chapter">zmwangx.colorout module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.ezlog.html"
+                        title="next chapter">zmwangx.ezlog module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.config.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

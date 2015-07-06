@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>zmwangx.hash module &mdash; pyzmwangx development documentation</title>
+    
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="_static/css/spc-extend.css">
+    <link rel="stylesheet" href="_static/scipy.css" type="text/css" >
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" >
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'development',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/copybutton.js"></script>
+    <link rel="top" title="pyzmwangx development documentation" href="index.html" >
+    <link rel="up" title="zmwangx package" href="zmwangx.html" >
+    <link rel="next" title="zmwangx.humansize module" href="zmwangx.humansize.html" >
+    <link rel="prev" title="zmwangx.ezlog module" href="zmwangx.ezlog.html" > 
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="header">
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="main">
+        
+	<div class="row-fluid">
+	  <div class="span12">
+	    <div class="spc-navbar">
+              
+    <ul class="nav nav-pills pull-left">
+        <li class="active"><a href="https://github.com/zmwangx/pyzmwangx">GitHub</a></li>
+	
+        <li class="active"><a href="index.html">pyzmwangx development documentation</a></li>
+	
+          <li class="active"><a href="zmwangx.html" accesskey="U">zmwangx package</a></li> 
+    </ul>
+              
+              
+    <ul class="nav nav-pills pull-right">
+      <li class="active">
+        <a href="genindex.html" title="General Index"
+           accesskey="I">index</a>
+      </li>
+      <li class="active">
+        <a href="py-modindex.html" title="Python Module Index"
+           >modules</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.humansize.html" title="zmwangx.humansize module"
+           accesskey="N">next</a>
+      </li>
+      <li class="active">
+        <a href="zmwangx.ezlog.html" title="zmwangx.ezlog module"
+           accesskey="P">previous</a>
+      </li>
+    </ul>
+              
+	    </div>
+	  </div>
+	</div>
+        
+
+	<div class="row-fluid">
+          <div class="span9">
+            
+        <div class="bodywrapper">
+          <div class="body" id="spc-section-body">
+            
+  <div class="section" id="module-zmwangx.hash">
+<span id="zmwangx-hash-module"></span><h1>zmwangx.hash module<a class="headerlink" href="#module-zmwangx.hash" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="zmwangx.hash.chunks">
+<tt class="descclassname">zmwangx.hash.</tt><tt class="descname">chunks</tt><big>(</big><em>fileobj</em>, <em>chunk_size=65536</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/hash.py#L12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.hash.chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read file in chunks.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fileobj</strong> : file-like object</p>
+<p><strong>chunk_size</strong> : int, optional</p>
+<blockquote>
+<div><p>Default is <tt class="docutils literal"><span class="pre">DEFAULT_CHUNK_SIZE</span></tt> bytes.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>chunks</strong> : generator</p>
+<blockquote class="last">
+<div><p>Generator for chunks of a file, each chunk being a <tt class="docutils literal"><span class="pre">bytes</span></tt>
+object of length <tt class="docutils literal"><span class="pre">chunk_size</span></tt>.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="zmwangx.hash.file_hash">
+<tt class="descclassname">zmwangx.hash.</tt><tt class="descname">file_hash</tt><big>(</big><em>file</em>, <em>algorithm='sha1'</em>, <em>chunk_size=65536</em>, <em>show_progress=False</em>, <em>total_size=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/hash.py#L89"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.hash.file_hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the hash of a file.</p>
+<p>The file object is read into memory in small chunks so as to not to
+consume too much memory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file</strong> : str or file-like object</p>
+<blockquote>
+<div><p>Path to the file on disk, or an opened file-like
+object. File-like object should be opened in binary mode.</p>
+</div></blockquote>
+<p><strong>algorithm</strong> : str, optional</p>
+<blockquote>
+<div><p>The hash algorithm to use; should be one of
+<tt class="docutils literal"><span class="pre">hashlib.algorithms_available</span></tt>. Default is <tt class="docutils literal"><span class="pre">&quot;sha1&quot;</span></tt>.</p>
+</div></blockquote>
+<p><strong>chunk_size</strong> : int, optional</p>
+<blockquote>
+<div><p>Default is <tt class="docutils literal"><span class="pre">DEFAULT_CHUNK_SIZE</span></tt>.</p>
+</div></blockquote>
+<p><strong>show_progress</strong> : bool, optional</p>
+<blockquote>
+<div><p>Whether to print progress bar. Default is <tt class="docutils literal"><span class="pre">False</span></tt>.</p>
+</div></blockquote>
+<p><strong>total_size</strong> : int, optional</p>
+<blockquote>
+<div><p>Total size in bytes, used for the progress bar. Only useful when
+<tt class="docutils literal"><span class="pre">show_progress</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, and <tt class="docutils literal"><span class="pre">file</span></tt> is a file-like
+object. Default is <tt class="docutils literal"><span class="pre">None</span></tt>, in which case the program will try
+to infer the total size.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hexdigest</strong> : str</p>
+<blockquote>
+<div><p>The hexadecimal digest of the file.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
+<blockquote>
+<div><p>If the algorithm is unrecognized.</p>
+</div></blockquote>
+<p><strong>OSError</strong></p>
+<blockquote class="last">
+<div><p>If there is error reading the file or file-like object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryFile</span><span class="p">()</span> <span class="k">as</span> <span class="n">fileobj</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">content</span> <span class="o">=</span> <span class="s">&quot;hello, world!</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="gp">... </span>    <span class="n">written</span> <span class="o">=</span> <span class="n">fileobj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">fileobj</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">md5digest</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="s">&quot;md5&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">fileobj</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">sha1digest</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">fileobj</span><span class="p">)</span>  <span class="c"># default algorithm</span>
+<span class="gp">... </span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">fileobj</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">sha256digest</span> <span class="o">=</span> <span class="n">file_hash</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="s">&quot;sha256&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">written</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;content: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">content</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">written</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;MD5 digest: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">md5digest</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">written</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;SHA-1 digest: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sha1digest</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">written</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;SHA-256 digest: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">sha256digest</span><span class="p">)</span>
+<span class="go">content: hello, world!</span>
+<span class="go">MD5 digest: 910c8bc73110b0cd1bc5d2bcae782511</span>
+<span class="go">SHA-1 digest: e91ba0972b9055187fa2efa8b5c156f487a8293a</span>
+<span class="go">SHA-256 digest: 4dca0fd5f424a31b03ab807cbae77eb32bf2d089eed1cee154b3afed458de0dc</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+          </div>
+      <div class="spc-rightsidebar span3">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="zmwangx.ezlog.html"
+                        title="previous chapter">zmwangx.ezlog module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zmwangx.humansize.html"
+                        title="next chapter">zmwangx.humansize module</a></p>
+  <h3>This Page</h3>
+  <div>
+    <a href="_sources/zmwangx.hash.txt"
+       rel="nofollow">Show Source</a>
+  </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container-navbar-bottom">
+      <div class="spc-navbar">
+        
+      </div>
+    </div>
+    <div class="container">
+    <div class="footer">
+    <div class="row-fluid">
+    <ul class="inline pull-left">
+      <li>
+        &copy; Copyright 2015, Zhiming Wang.
+      </li>
+      <li>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+      </li>
+    </ul>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
