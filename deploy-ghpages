@@ -1,0 +1,66 @@
+#!/usr/bin/env zsh
+
+unsetopt shwordsplit ksharrays
+eval RED=$'\e[31m'
+eval BLUE=$'\e[34m'
+eval BOLD=$'\e[01m'
+eval RESET=$'\e[00m'
+
+(( $+commands[realpath] )) || { echo "${RED}error: realpath not found; please install coreutils${RESET}" >&2; exit 1; }
+here=$(dirname "$(realpath $0)")
+htmldocdir=$(realpath --relative-to=$PWD $here/docs/build/html)
+version_script=$here/zmwangx/version.py
+
+gpg_sign=true
+git_commit_opts=(--no-verify) # skip pre-commit and commit-msg hooks
+while getopts ":h" opt; do
+    case $opt in
+        h)
+            cat <<EOF
+Deploy HTML doc built by Sphinx to GitHub pages.
+
+Usage: deploy-ghpages [options]
+
+Options:
+    -h  show this help and exit
+    -n  no signature, i.e., do not pass the --gpg-sign option to git-commit
+EOF
+            exit 1
+            ;;
+        n) gpg_sign=false;;
+        :) echo "${RED}error: option -$OPTARG requires an argument${RESET}" >&2; exit 1;;
+        \?) echo "${RED}error: unrecognized option -$OPTARG${RESET}" >&2; exit 1;;
+        *) echo "${RED}error: getopts internal error: unrecgonized option name $opt${RESET}" >&2; exit 1;;
+    esac
+done
+shift $((OPTIND-1))
+
+[[ $gpg_sign == true ]] && git_commit_opts+="--gpg-sign"
+
+# no Jekyll: https://help.github.com/articles/files-that-start-with-an-underscore-are-missing/
+echo "${BOLD}${BLUE}touch '$htmldocdir/.nojekyll'${RESET}" >&2
+touch $htmldocdir/.nojekyll
+
+# add all
+echo "${BOLD}${BLUE}git -C '$htmldocdir' add --all${RESET}" >&2
+git -C $htmldocdir add --all || { echo "${RED}error: git-add failed${RESET}" >&2; exit 1; }
+
+# commit all
+commit_message="
+version $($version_script)
+
+master was at $(git -C $here log -1 --pretty=oneline master)
+"
+echo "${BOLD}${BLUE}git -C '$htmldocdir' commit $git_commit_opts --message='$commit_message'${RESET}" >&2
+git -C $htmldocdir commit $git_commit_opts -m $commit_message
+
+# make sure directory is clean after commit
+[[ -z $(git -C $htmldocdir status --porcelain) ]] || {
+    echo "${RED}error: failed to commit all changes; '$htmldocdir' still dirty${RESET}" >&2
+    echo "${RED}error: please manually inspect what was left out${RESET}" >&2
+    exit 1
+}
+
+# push
+echo "${BOLD}${BLUE}git -C '$htmldocdir' push origin gh-pages${RESET}" >&2
+git -C $htmldocdir push origin gh-pages || { echo "${RED}error: git-push failed${RESET}" >&2; exit 1; }

@@ -2,13 +2,13 @@
 pyzmwangx
 =========
 
-|Build Status| |Docs|
+|Build Status|
 
 *Caution: This package is Python 3.3+ only.*
 
 This is a collection of small Python utilities used in my day-to-day scripts.
 
-API doc is hosted on `Read the Docs <https://pyzmwangx.readthedocs.org/>`_.
+API doc is hosted at https://zmwangx.github.io/pyzmwangx.
 
 ------------
 Installation
@@ -36,5 +36,3 @@ Modules
 
 .. |Build Status| image:: https://travis-ci.org/zmwangx/pyzmwangx.svg?branch=master
    :target: https://travis-ci.org/zmwangx/pyzmwangx
-.. |Docs| image:: https://readthedocs.org/projects/pyzmwangx/badge/?version=latest
-   :target: https://pyzmwangx.readthedocs.org/
