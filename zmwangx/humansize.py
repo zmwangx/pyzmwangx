@@ -101,12 +101,16 @@ def humansize(size, prefix="iec-i", unit="B", space=False):
         if size < multiplier:
             fullunit = "%s%s%s" % (connection, unitprefix, unit)
             # ensure at least three significant figures
-            if size <= 9:
-                return "%.2f%s" % (round_up(size, 2), fullunit)
-            elif size <= 99:
-                return "%.1f%s" % (round_up(size, 1), fullunit)
-            else:
-                return "%.0f%s" % (round_up(size, 0), fullunit)
+            # try two decimal digits
+            rounded_size = round_up(size, 2)
+            if rounded_size < 10:
+                return "%.2f%s" % (rounded_size, fullunit)
+            # try one decimal digit
+            rounded_size = round_up(size, 1)
+            if rounded_size < 100:
+                return "%.1f%s" % (rounded_size, fullunit)
+            # round to whole number
+            return "%.0f%s" % (round_up(size, 0), fullunit)
     # use the largest unit
     return "%.1f%s%s%s" % (round_up(size, 1), connection, unitprefix, unit)
 
