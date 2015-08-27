@@ -3,6 +3,9 @@ python:
   - 3.3
   - 3.4
   - nightly
+matrix:
+  allow_failures:
+    - python: "nightly"
 install:
   - pip install -r requirements.txt -r tests/requirements.txt -r docs/requirements.txt
   - python setup.py develop
