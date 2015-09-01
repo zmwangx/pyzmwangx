@@ -171,7 +171,7 @@ def cprompt(prompt, info=None, allow_empty=False, color="green"):
             if response or allow_empty:
                 break
             else:
-                cprint("default", "Input should not be empty.", file=devtty)
+                cprint("yellow", "Input should not be empty.", file=devtty)
         return response
 
 def cyesno(info=None, prompt="Continue? [yN] ", default="n", color="yellow"):
