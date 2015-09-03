@@ -57,7 +57,7 @@ def cwarning(msg):
 
 def ccommand(cmd):
     """Print command to run in bold blue."""
-    sys.stderr.write("%s%s%s%s\n" %
+    sys.stderr.write("%s%s==> %s%s\n" %
                      (COLORS["BOLD"], COLORS["BLUE"], cmd, COLORS["RESET"]))
 
 def cprogress(msg):
