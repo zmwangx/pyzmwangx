@@ -50,7 +50,7 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
             deduplicate=True, session=None):
     """Extract URLs matching a pattern from an HTML document.
 
-    The HTML document is either passed in in full as a string (the
+    The HTML document is either passed in full as a string (the
     `content` parameter), or is read from a local file (the `filepath`
     parameter), or is retrieved from a remote URL (the `url`
     parameter). Only one of the these three -- the first one in
