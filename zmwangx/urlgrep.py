@@ -46,8 +46,8 @@ The data are scraped from w3schools.com on 2015-05-09.
 
 """
 
-def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
-            deduplicate=True, session=None):
+def urlgrep(pattern=None, content=None, filepath=None, url=None,
+            selector=None, base=None, deduplicate=True, session=None):
     """Extract URLs matching a pattern from an HTML document.
 
     The HTML document is either passed in full as a string (the
@@ -56,6 +56,12 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
     parameter). Only one of the these three -- the first one in
     `content`, `filepath`, and `url` that is not ``None`` -- is
     used. One of the three must be specified.
+
+    Scope of search can be refined with an optional CSS selector
+    (`selector` parameter). If specified, search is performed inside
+    *all* matched tags but no more. This should help greatly in noise
+    reduction, especially from web pages that try to offer suggestions
+    and whatnot at the bottom or in sidebars.
 
     Sometimes we need a base URL to resolve relative URLs. The `url`
     argument or its redirection (if any) is automatically used as base
@@ -84,6 +90,9 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
         URL pointing to an HTML document (note that the ``file`` scheme
         is not supported by ``requests``). If no scheme is supplied in
         the URL, use ``http://``.
+    selector : str, optional
+        CSS selector recognized by BeautifulSoup. If specified, search
+        scope is limited to all matched tags but no more.
     base : str, optional
         Base URL used for `content` for `filepath`. If no scheme is
         supplied in the URL, use ``http://`` (for a local path, use
@@ -146,14 +155,18 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None, base=None,
     if soup.head and soup.head.base and "href" in soup.head.base.attrs:
         base = soup.head.base["href"]
 
+    # select part of the soup with the optional selector
+    selections = [soup] if selector is None else soup.select(selector)
+
     matching_urls = []
-    for tag in soup.descendants:
-        if tag.name in _TAG_ATTRS:
-            for attribute in _TAG_ATTRS[tag.name]:
-                if attribute in tag.attrs:
-                    parsed_url = urllib.parse.urljoin(base, tag[attribute])
-                    if regex.search(parsed_url):
-                        matching_urls.append(parsed_url)
+    for selection in selections:
+        for tag in selection.descendants:
+            if tag.name in _TAG_ATTRS:
+                for attribute in _TAG_ATTRS[tag.name]:
+                    if attribute in tag.attrs:
+                        parsed_url = urllib.parse.urljoin(base, tag[attribute])
+                        if regex.search(parsed_url):
+                            matching_urls.append(parsed_url)
 
     if deduplicate:
         seen = set()
@@ -174,6 +187,11 @@ def main():
                         times on the command line. "http://" is
                         automatically attached if the scheme is left
                         out.""")
+    parser.add_argument("-s", "--selector",
+                        help="""CSS selector for restricting search
+                        scope. If specified, the search scope is
+                        restricted to all selected tags, and no
+                        more.""")
     parser.add_argument("-b", "--base",
                         help="""Base URL. Only used for files or
                         stdin. "http://" is automatically attached if
@@ -188,6 +206,7 @@ def main():
                         help="""Files to be parsed.""")
     args = parser.parse_args()
     urls = args.url if args.url is not None else []
+    selector = args.selector
     filepaths = args.filepaths
     base = args.base
     pattern = args.pattern
@@ -200,6 +219,7 @@ def main():
         content = sys.stdin.read()
         matching_urls = urlgrep(pattern=pattern,
                                 content=content,
+                                selector=selector,
                                 base=base,
                                 deduplicate=deduplicate)
         print('\n'.join(matching_urls))
@@ -209,6 +229,7 @@ def main():
             try:
                 matching_urls = urlgrep(pattern=pattern,
                                         url=url,
+                                        selector=selector,
                                         deduplicate=deduplicate)
 
                 if verbose and matching_urls:
@@ -228,6 +249,7 @@ def main():
             try:
                 matching_urls = urlgrep(pattern=pattern,
                                         filepath=filepath,
+                                        selector=selector,
                                         base=base,
                                         deduplicate=deduplicate)
 
