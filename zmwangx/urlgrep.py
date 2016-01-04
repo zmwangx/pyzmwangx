@@ -46,6 +46,10 @@ The data are scraped from w3schools.com on 2015-05-09.
 
 """
 
+# disguise as Microsoft Edge, because apparently some servers are not
+# thrilled to see python-requests in the UA string
+REQUEST_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240"}
+
 def urlgrep(pattern=None, content=None, filepath=None, url=None,
             selector=None, base=None, deduplicate=True, session=None):
     """Extract URLs matching a pattern from an HTML document.
@@ -137,7 +141,7 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None,
         if not urlscheme.match(url):
             url = "http://%s" % url
         if session is None:
-            request = requests.get(url)
+            request = requests.get(url, headers=REQUEST_HEADERS)
         else:
             request = session.get(url)
         content = request.content
