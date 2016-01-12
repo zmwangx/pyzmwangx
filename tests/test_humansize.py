@@ -44,6 +44,14 @@ class TestHumansize(unittest.TestCase):
         return cases
 
     def test_numfmt(self):
+        # test existence of numfmt(1); if not, or if not from coreutils, just skip
+        try:
+            output = subprocess.check_output(["numfmt", "--version"]).decode('utf-8')
+            if "GNU coreutils" not in output:
+                return
+        except (OSError, subprocess.CalledProcessError):
+            return
+
         cases = self.gen_test_cases()
         numfmt_input = '\n'.join([str(n) for n in cases])
         for prefix in ['iec', 'si']:
