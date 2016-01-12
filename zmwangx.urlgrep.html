@@ -83,20 +83,25 @@
 <p>Extract URLs from HTML documents.</p>
 <dl class="function">
 <dt id="zmwangx.urlgrep.main">
-<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.main" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L183"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>CLI interface.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="zmwangx.urlgrep.urlgrep">
-<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">urlgrep</tt><big>(</big><em>pattern=None</em>, <em>content=None</em>, <em>filepath=None</em>, <em>url=None</em>, <em>base=None</em>, <em>deduplicate=True</em>, <em>session=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L49"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.urlgrep" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">zmwangx.urlgrep.</tt><tt class="descname">urlgrep</tt><big>(</big><em>pattern=None</em>, <em>content=None</em>, <em>filepath=None</em>, <em>url=None</em>, <em>selector=None</em>, <em>base=None</em>, <em>deduplicate=True</em>, <em>session=None</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/urlgrep.py#L53"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.urlgrep.urlgrep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract URLs matching a pattern from an HTML document.</p>
-<p>The HTML document is either passed in in full as a string (the
+<p>The HTML document is either passed in full as a string (the
 <cite>content</cite> parameter), or is read from a local file (the <cite>filepath</cite>
 parameter), or is retrieved from a remote URL (the <cite>url</cite>
 parameter). Only one of the these three &#8211; the first one in
 <cite>content</cite>, <cite>filepath</cite>, and <cite>url</cite> that is not <tt class="docutils literal"><span class="pre">None</span></tt> &#8211; is
 used. One of the three must be specified.</p>
+<p>Scope of search can be refined with an optional CSS selector
+(<cite>selector</cite> parameter). If specified, search is performed inside
+<em>all</em> matched tags but no more. This should help greatly in noise
+reduction, especially from web pages that try to offer suggestions
+and whatnot at the bottom or in sidebars.</p>
 <p>Sometimes we need a base URL to resolve relative URLs. The <cite>url</cite>
 argument or its redirection (if any) is automatically used as base
 when the document is retrieved from <cite>url</cite>. Otherwise, the <cite>base</cite>
@@ -131,6 +136,11 @@ scheme&#8221;. You may supply an empty string if you want to include
 <div><p>URL pointing to an HTML document (note that the <tt class="docutils literal"><span class="pre">file</span></tt> scheme
 is not supported by <tt class="docutils literal"><span class="pre">requests</span></tt>). If no scheme is supplied in
 the URL, use <tt class="docutils literal"><span class="pre">http://</span></tt>.</p>
+</div></blockquote>
+<p><strong>selector</strong> : str, optional</p>
+<blockquote>
+<div><p>CSS selector recognized by BeautifulSoup. If specified, search
+scope is limited to all matched tags but no more.</p>
 </div></blockquote>
 <p><strong>base</strong> : str, optional</p>
 <blockquote>
