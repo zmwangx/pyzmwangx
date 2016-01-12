@@ -7,10 +7,19 @@ python:
 matrix:
   allow_failures:
     - python: "nightly"
+before_install:
+  - wget https://ftp.gnu.org/gnu/coreutils/coreutils-8.24.tar.xz
+  - tar xf coreutils-8.24.tar.xz
+  - cd coreutils-8.24
+  - ./configure --prefix=$HOME
+  - make
+  - make install
+  - cd ..
 install:
   - pip install -r requirements.txt -r tests/requirements.txt -r docs/requirements.txt
   - python setup.py develop
 script:
+  - PATH=$HOME/bin:$PATH
   - nosetests --verbose --exe --with-coverage --cover-erase --cover-package=zmwangx --with-doctest
   # random tests of urlgrep
   - PYTHON_ORG_BASE=$(curl -sSIL python.org | awk '/^Location/ {print $2}' | tail -1 | tr -d '\r' | tr -d '\n')
