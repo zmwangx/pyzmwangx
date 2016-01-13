@@ -88,11 +88,23 @@
 <p>Convert size in bytes to human readable format.</p>
 <dl class="function">
 <dt id="zmwangx.humansize.humansize">
-<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">humansize</tt><big>(</big><em>size</em>, <em>prefix='iec-i'</em>, <em>unit='B'</em>, <em>space=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L38"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.humansize" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">humansize</tt><big>(</big><em>size</em>, <em>prefix='iec-i'</em>, <em>unit='B'</em>, <em>space=False</em>, <em>numfmt=False</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L50"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.humansize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert size in number of bytes to human readable format.</p>
-<p>Always display at least three significant figures. Size is rounded
-<em>upward</em> whenever rounding is needed. Therefore, 1001 bytes, being
-1.001 kilobyte, is rounded to 1.01 KB.</p>
+<p>If <tt class="docutils literal"><span class="pre">numfmt</span></tt> is False (default), display at least three significant
+figures. Size is rounded <em>upward</em> whenever rounding is
+needed. Therefore, 1001 bytes, being 1.001 kilobyte, is rounded to
+1.01 KB.</p>
+<p>If <tt class="docutils literal"><span class="pre">numfmt</span></tt> is True, mimick number of format of coreutils
+<tt class="docutils literal"><span class="pre">numfmt(1)</span></tt>, which is also the format used by <tt class="docutils literal"><span class="pre">ls(1)</span></tt>,
+<tt class="docutils literal"><span class="pre">du(1)</span></tt>, etc. At most one decimal place is printed in this
+mode. Note that <tt class="docutils literal"><span class="pre">numfmt(1)</span></tt> compatibility is not guaranteed, due
+to its use of long double, the precision of which falls short at a
+certain point (while humansize uses PSL&#8217;s decimal, which defaults to
+28 decimal places &#8211; more than capable for the YB level). On OS X
+10.11.2 with Python 3.5.1, the difference manifests at
+18446744073709551617 = 2^64 + 1 (16E + 1). <tt class="docutils literal"><span class="pre">numfmt</span></tt> reports 16E,
+while rounding up should produce 17E. Thus, we only test <tt class="docutils literal"><span class="pre">numfmt</span></tt>
+compatibility up to 1EiB.</p>
 <p>Although this function is usually used for size in bytes,
 technically it can be used for converting any number in any unit
 system to using the SI or IEC prefixes.</p>
@@ -143,27 +155,29 @@ unit. Default is <tt class="docutils literal"><span class="pre">False</span></tt
 <span class="go">&#39;3.00Mi&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">31415926</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">&#39;30.0 MiB&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">humansize</span><span class="p">(</span><span class="mi">31415926</span><span class="p">,</span> <span class="n">numfmt</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">&#39;30MiB&#39;</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="function">
 <dt id="zmwangx.humansize.main">
-<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.main" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L162"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>CLI interface.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="zmwangx.humansize.round_up">
-<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">round_up</tt><big>(</big><em>number</em>, <em>ndigits=0</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L9"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.round_up" title="Permalink to this definition">¶</a></dt>
-<dd><p>Round a nonnegative number upward to a given precision.</p>
+<tt class="descclassname">zmwangx.humansize.</tt><tt class="descname">round_up</tt><big>(</big><em>number</em>, <em>ndigits=0</em><big>)</big><a class="reference external" href="http://github.com/zmwangx/pyzmwangx/blob/master/zmwangx/humansize.py#L10"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zmwangx.humansize.round_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round a nonnegative decimal upward to a given precision.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number</strong> : float</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number</strong> : float or decimal.Decimal</p>
 <blockquote>
-<div><p>The number to be rounded.</p>
+<div><p>The decimal to be rounded.</p>
 </div></blockquote>
 <p><strong>ndigits</strong> : int, optional</p>
 <blockquote>
@@ -171,7 +185,10 @@ unit. Default is <tt class="docutils literal"><span class="pre">False</span></tt
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float or decimal.Decimal</p>
+<blockquote class="last">
+<div><p>Depending on type of <tt class="docutils literal"><span class="pre">number</span></tt>.</p>
+</div></blockquote>
 </td>
 </tr>
 </tbody>
