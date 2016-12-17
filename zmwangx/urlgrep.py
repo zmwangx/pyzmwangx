@@ -152,7 +152,7 @@ def urlgrep(pattern=None, content=None, filepath=None, url=None,
     regex = (re.compile(pattern) if pattern is not None
              else re.compile(r"^(?!javascript:)"))
 
-    soup = bs4.BeautifulSoup(content, "lxml")
+    soup = bs4.BeautifulSoup(content, "html.parser")
 
     # base URL might be modified by the HTML <base> tag, which must
     # reside inside <head>
