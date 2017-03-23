@@ -19,7 +19,7 @@ def chdir(newdir):
     finally:
         os.chdir(saved_dir)
 
-BASE_VERSION = 0.2
+BASE_VERSION = 0.3
 with chdir(os.path.dirname(os.path.realpath(__file__))):
     try:
         git_describe_version = subprocess.check_output(["git", "describe"]).strip().decode("utf-8")
