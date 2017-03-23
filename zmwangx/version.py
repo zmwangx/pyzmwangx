@@ -22,7 +22,8 @@ def chdir(newdir):
 BASE_VERSION = 0.3
 with chdir(os.path.dirname(os.path.realpath(__file__))):
     try:
-        git_describe_version = subprocess.check_output(["git", "describe"]).strip().decode("utf-8")
+        git_describe_version = (subprocess.check_output(["git", "describe"], stderr=subprocess.DEVNULL)
+                                .strip().decode("utf-8"))
         __version__ = git_describe_version.replace("-", ".", 1).replace("-", "+")
     except subprocess.CalledProcessError:
         __version__ = BASE_VERSION
